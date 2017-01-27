@@ -1,0 +1,8 @@
+require feNeuralNet;
+
+operator entry() {
+  Layer lay1(10,'tansig');
+  Layer lay2(1,'purelin');
+  report(lay1);
+  report(lay2);
+}

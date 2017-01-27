@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: ILayer\n  transferFunc: String\n"
+    },
+  "title" : "SetType",
+  "ports" : [
+    {
+      "objectType" : "ExecPort",
+      "name" : "exec",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Execute"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "this",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "ILayer"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "transferFunc",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "String"
+      }
+    ],
+  "extDeps" : {
+    "feNeuralNet" : "*"
+    },
+  "presetGUID" : "10FA259E5C5FACA6D75493A81E4982DF",
+  "code" : "require feNeuralNet;
+
+dfgEntry {
+  this.setType(transferFunc);
+}
+"
+  }

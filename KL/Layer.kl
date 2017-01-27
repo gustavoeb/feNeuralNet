@@ -1,0 +1,116 @@
+//
+// Developed by Gustavo E. Boehs
+//
+/**
+The Layer object represents a neural network's layers. It can be of three types
+('input', 'hidden', or 'output'), and supports 4 transfer functions (linear,
+tangent sigmoid, logistic sigmoid and softmax).
+Multiple layers are connected in a Net object
+
+\rst
+  .. kl-example:: Layer
+
+    // Create a hidden layer with 10 neurons
+    // and 'tansig' transfer function.
+    Layer layer(10,'tansig','hidden');
+
+    // Add layer to a network.
+    Net net();
+    net.layers.push(layer);
+
+\endrst
+*/
+
+// We are currently using our on Matrix implementation.
+// It is possible to move to the Mat object introduced
+// in FE2.3.1. But it needs aditional methods such as
+// fromFile, horzcat and vertcat.
+require Matrix;
+
+object Layer : ILayer {
+  Integer index;
+  Integer parentIndex;
+  Integer neurons;
+  String transferFunc;
+  String type;
+};
+
+/// Constructs a layer based on number of neurons and transfer function
+function Layer(Integer neurons, String transferFunc) {
+  this.setTransferFunc(transferFunc);
+  this.setNeuronSize(neurons);
+  this.type = 'unknown';
+}
+
+/// Constructs a layer based on number of neurons, transfer function, and type
+function Layer(Integer neurons, String transferFunc, String type) {
+  this.setTransferFunc(transferFunc);
+  this.setNeuronSize(neurons);
+  this.setType(type);
+}
+
+/// Resizes a layer.
+function Layer.setNeuronSize!(Integer neurons) {
+  this.neurons = neurons;
+}
+
+/// Gets a layer size.
+function Integer Layer.getNeuronSize() {
+  return this.neurons;
+}
+
+/// Alters the transfer function within a layer.
+function Layer.setTransferFunc!(String transferFunc) {
+  Integer supportedFuncs[String];
+  supportedFuncs['purelin'] = 0;
+  supportedFuncs['logsig'] = 1;
+  supportedFuncs['tansig'] = 2;
+  supportedFuncs['softmax'] = 3;
+  if (~supportedFuncs.has(transferFunc))
+    setError('Transfer function ' + transferFunc + ' is not supported.');
+  else
+    this.transferFunc = transferFunc;
+}
+
+/// Gets the layers current transfer function.
+function String Layer.getTransferFunc() {
+  return this.transferFunc;
+}
+
+/// Sets the layer type.
+function Layer.setType!(String type) {
+  Integer supportedTypes[String];
+  supportedTypes['input'] = 0;
+  supportedTypes['hidden'] = 1;
+  supportedTypes['output'] = 2;
+
+  if (~supportedTypes.has(type))
+    setError('Type ' + type + ' is not supported.');
+  else
+    this.type = type;
+}
+
+/// Gets the layer type.
+function String Layer.getType() {
+  return this.type;
+}
+
+/// Sets the layer index.
+function Layer.setIndex!(Integer index) {
+  this.index = index;
+}
+
+/// Gets the layer index.
+function Integer Layer.getIndex() {
+  return this.index;
+}
+
+/// Connects the layer to a parent.
+function Layer.setParentIndex!(Integer index) {
+  this.parentIndex = index;
+}
+
+/// Gets the layer's a parent.
+function Integer Layer.getParentIndex() {
+  return this.parentIndex;
+}

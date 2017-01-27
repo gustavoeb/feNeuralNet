@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Constructs a network with a standard fit template:\n1 input layer, N hidden layers (tansig), 1 output layer (purelin)\n\nSupported types:\n  this: Net\n  layerSize: Integer[]\n"
+    },
+  "title" : "SetFitNetTopo",
+  "ports" : [
+    {
+      "objectType" : "ExecPort",
+      "name" : "exec",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Execute"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "this",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Net"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "layerSize",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Integer[]"
+      }
+    ],
+  "extDeps" : {
+    "feNeuralNet" : "*"
+    },
+  "presetGUID" : "8FF4BBDF0AAE77B4EB9F46AB8AD83A8D",
+  "code" : "require feNeuralNet;
+
+dfgEntry {
+  this.setFitNetTopo(layerSize);
+}
+"
+  }

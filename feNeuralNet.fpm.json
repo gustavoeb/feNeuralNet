@@ -1,0 +1,19 @@
+{
+  "version": "0.0.1",
+  "code": [
+    // interfaces
+    "KL/interfaces.kl",
+
+    // functions
+    "KL/transferFunctions.kl",
+
+    // objects
+    "KL/Layer.kl",
+    "KL/Net.kl"
+    ],
+
+  "dfgPresets": {
+    "dir": "DFG",
+    "presetPath": "feNeuralNet"
+  }
+}

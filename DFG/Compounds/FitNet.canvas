@@ -1,0 +1,709 @@
+{
+  "objectType" : "Graph",
+  "metadata" : {
+    "uiTextColor" : "{\n  \"r\" : 20,\n  \"g\" : 20,\n  \"b\" : 20\n  }",
+    "uiNodeColor" : "{\n  \"r\" : 121,\n  \"g\" : 134,\n  \"b\" : 143\n  }",
+    "uiGraphZoom" : "{\n  \"value\" : 0.4104854166507721\n  }",
+    "uiTooltip" : "Creates a neural network for data fitting with one hidden layer.",
+    "uiGraphPan" : "{\n  \"x\" : 190.8760681152344,\n  \"y\" : 232.4827117919922\n  }"
+    },
+  "title" : "FitNet",
+  "ports" : [
+    {
+      "objectType" : "ExecPort",
+      "name" : "exec",
+      "nodePortType" : "IO",
+      "defaultValues" : {
+        "Execute" : {}
+        },
+      "execPortType" : "IO",
+      "typeSpec" : "Execute"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "featureSize",
+      "nodePortType" : "Out",
+      "defaultValues" : {
+        "Integer" : 2
+        },
+      "execPortType" : "In",
+      "typeSpec" : "Integer"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "hiddenFeatSize",
+      "nodePortType" : "Out",
+      "defaultValues" : {
+        "Integer" : 10
+        },
+      "execPortType" : "In",
+      "typeSpec" : "Integer"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "outputSize",
+      "nodePortType" : "Out",
+      "defaultValues" : {
+        "Integer" : 4
+        },
+      "execPortType" : "In",
+      "typeSpec" : "Integer"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "hiddenWeights",
+      "nodePortType" : "Out",
+      "defaultValues" : {
+        "Matrix" : {
+          "longArray" : [],
+          "width" : 0,
+          "height" : 0
+          }
+        },
+      "execPortType" : "In",
+      "typeSpec" : "Matrix"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "hiddenBias",
+      "nodePortType" : "Out",
+      "defaultValues" : {
+        "Matrix" : {
+          "longArray" : [],
+          "width" : 0,
+          "height" : 0
+          }
+        },
+      "execPortType" : "In",
+      "typeSpec" : "Matrix"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "outputWeights",
+      "nodePortType" : "Out",
+      "defaultValues" : {
+        "Matrix" : {
+          "longArray" : [],
+          "width" : 0,
+          "height" : 0
+          }
+        },
+      "execPortType" : "In",
+      "typeSpec" : "Matrix"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "outputBias",
+      "nodePortType" : "Out",
+      "defaultValues" : {
+        "Matrix" : {
+          "longArray" : [],
+          "width" : 0,
+          "height" : 0
+          }
+        },
+      "execPortType" : "In",
+      "typeSpec" : "Matrix"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "this",
+      "nodePortType" : "In",
+      "defaultValues" : {
+        "Net" : null
+        },
+      "execPortType" : "Out"
+      }
+    ],
+  "extDeps" : {},
+  "presetGUID" : "535988BBDFE4E37C8E099A39850BBC66",
+  "nodes" : [
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":-25.537176013,\"y\":265.117473722}"
+        },
+      "name" : "Push_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "name" : "exec",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "array",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "element",
+          "nodePortType" : "In"
+          }
+        ],
+      "executable" : "Fabric.Core.Array.Push",
+      "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":124.462793469,\"y\":290.117473722}"
+        },
+      "name" : "Push_2",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "name" : "exec",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "array",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "element",
+          "nodePortType" : "In"
+          }
+        ],
+      "executable" : "Fabric.Core.Array.Push",
+      "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":279.53266573,\"y\":343.114873409}"
+        },
+      "name" : "Push_3",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "name" : "exec",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "array",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "element",
+          "nodePortType" : "In"
+          }
+        ],
+      "executable" : "Fabric.Core.Array.Push",
+      "presetGUID" : "572880BF96ACC34D6987BE3333715F52"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":668.6730997560001,\"y\":255.877244473}"
+        },
+      "name" : "SetWeights_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "name" : "exec",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "this",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "connection",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "Vec2" : {
+              "x" : 1,
+              "y" : 0
+              }
+            }
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "weights",
+          "nodePortType" : "In"
+          }
+        ],
+      "executable" : "feNeuralNet.Net.SetWeights",
+      "presetGUID" : "406783EA458E9C57079815AA41CF0D5D"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":825.863646746,\"y\":253.524078846}"
+        },
+      "name" : "SetBiases_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "name" : "exec",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "this",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "connection",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "Vec2" : {
+              "x" : 1,
+              "y" : 0
+              }
+            }
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "biases",
+          "nodePortType" : "In"
+          }
+        ],
+      "executable" : "feNeuralNet.Net.SetBiases",
+      "presetGUID" : "5C3397F513CE02568136CA7BC97D9A67"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":985.8126318450001,\"y\":257.007909775}"
+        },
+      "name" : "SetWeights_2",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "name" : "exec",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "this",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "connection",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "Vec2" : {
+              "x" : 2,
+              "y" : 1
+              }
+            }
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "weights",
+          "nodePortType" : "In"
+          }
+        ],
+      "executable" : "feNeuralNet.Net.SetWeights",
+      "presetGUID" : "406783EA458E9C57079815AA41CF0D5D"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":1142.10635829,\"y\":259.763575077}"
+        },
+      "name" : "SetBiases_2",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "name" : "exec",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "this",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "connection",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "Vec2" : {
+              "x" : 2,
+              "y" : 1
+              }
+            }
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "biases",
+          "nodePortType" : "In"
+          }
+        ],
+      "executable" : "feNeuralNet.Net.SetBiases",
+      "presetGUID" : "5C3397F513CE02568136CA7BC97D9A67"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":1298.75609958,\"y\":258.767265916}"
+        },
+      "name" : "Cache_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "name" : "exec",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "value",
+          "nodePortType" : "In"
+          }
+        ],
+      "executable" : "Fabric.Core.Data.Cache",
+      "presetGUID" : "D903AFD981FE9214C69943F542D5FD60"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":276.78637886,\"y\":195.583179474}"
+        },
+      "name" : "Net_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "name" : "exec",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "result",
+          "nodePortType" : "Out"
+          }
+        ],
+      "executable" : "feNeuralNet.Net.Net",
+      "presetGUID" : "E85344F42B4FB4F8C95F0E2BD088AF3B"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":471.586411953,\"y\":254.225892067}"
+        },
+      "name" : "SetFitNetTopo_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "name" : "exec",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "this",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "layerSize",
+          "nodePortType" : "In"
+          }
+        ],
+      "executable" : "feNeuralNet.Net.SetFitNetTopo",
+      "presetGUID" : "8FF4BBDF0AAE77B4EB9F46AB8AD83A8D"
+      }
+    ],
+  "connections" : {
+    "featureSize" : [
+      "Push_1.element"
+      ],
+    "hiddenFeatSize" : [
+      "Push_2.element"
+      ],
+    "outputSize" : [
+      "Push_3.element"
+      ],
+    "hiddenWeights" : [
+      "SetWeights_1.weights"
+      ],
+    "hiddenBias" : [
+      "SetBiases_1.biases"
+      ],
+    "outputWeights" : [
+      "SetWeights_2.weights"
+      ],
+    "outputBias" : [
+      "SetBiases_2.biases"
+      ],
+    "Push_1.array" : [
+      "Push_2.array"
+      ],
+    "Push_2.array" : [
+      "Push_3.array"
+      ],
+    "Push_3.array" : [
+      "SetFitNetTopo_1.layerSize"
+      ],
+    "SetWeights_1.this" : [
+      "SetBiases_1.this"
+      ],
+    "SetBiases_1.this" : [
+      "SetWeights_2.this"
+      ],
+    "SetWeights_2.this" : [
+      "SetBiases_2.this"
+      ],
+    "SetBiases_2.this" : [
+      "Cache_1.value"
+      ],
+    "Cache_1.value" : [
+      "this"
+      ],
+    "Net_1.result" : [
+      "SetFitNetTopo_1.this"
+      ],
+    "SetFitNetTopo_1.this" : [
+      "SetWeights_1.this"
+      ]
+    },
+  "requiredPresets" : {
+    "Fabric.Core.Array.Push" : {
+      "objectType" : "Func",
+      "title" : "Push[]",
+      "ports" : [
+        {
+          "objectType" : "ExecPort",
+          "name" : "exec",
+          "nodePortType" : "IO",
+          "execPortType" : "IO",
+          "typeSpec" : "Execute"
+          },
+        {
+          "objectType" : "ExecPort",
+          "name" : "array",
+          "nodePortType" : "IO",
+          "execPortType" : "IO",
+          "typeSpec" : "$TYPE$[]"
+          },
+        {
+          "objectType" : "ExecPort",
+          "name" : "element",
+          "nodePortType" : "Out",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "572880BF96ACC34D6987BE3333715F52",
+      "code" : "
+dfgEntry {
+	array.push(element);
+}
+"
+      },
+    "feNeuralNet.Net.SetWeights" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Sets the weights between connections\n\nSupported types:\n  this: Net\n  connection: Vec2\n  weights: Matrix\n"
+        },
+      "title" : "SetWeights",
+      "ports" : [
+        {
+          "objectType" : "ExecPort",
+          "name" : "exec",
+          "nodePortType" : "IO",
+          "execPortType" : "IO",
+          "typeSpec" : "Execute"
+          },
+        {
+          "objectType" : "ExecPort",
+          "name" : "this",
+          "nodePortType" : "IO",
+          "execPortType" : "IO",
+          "typeSpec" : "Net"
+          },
+        {
+          "objectType" : "ExecPort",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 255,\n  \"g\" : 242,\n  \"b\" : 0\n  }"
+            },
+          "name" : "connection",
+          "nodePortType" : "Out",
+          "execPortType" : "In",
+          "typeSpec" : "Vec2"
+          },
+        {
+          "objectType" : "ExecPort",
+          "name" : "weights",
+          "nodePortType" : "Out",
+          "execPortType" : "In",
+          "typeSpec" : "Matrix"
+          }
+        ],
+      "extDeps" : {
+        "feNeuralNet" : "*"
+        },
+      "presetGUID" : "406783EA458E9C57079815AA41CF0D5D",
+      "code" : "require feNeuralNet;
+
+dfgEntry {
+  this.setWeights(connection, weights);
+}
+"
+      },
+    "feNeuralNet.Net.SetBiases" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Sets the bias weights between connections\n\nSupported types:\n  this: Net\n  connection: Vec2\n  biases: Matrix\n"
+        },
+      "title" : "SetBiases",
+      "ports" : [
+        {
+          "objectType" : "ExecPort",
+          "name" : "exec",
+          "nodePortType" : "IO",
+          "execPortType" : "IO",
+          "typeSpec" : "Execute"
+          },
+        {
+          "objectType" : "ExecPort",
+          "name" : "this",
+          "nodePortType" : "IO",
+          "execPortType" : "IO",
+          "typeSpec" : "Net"
+          },
+        {
+          "objectType" : "ExecPort",
+          "metadata" : {
+            "uiColor" : "{\n  \"r\" : 255,\n  \"g\" : 242,\n  \"b\" : 0\n  }"
+            },
+          "name" : "connection",
+          "nodePortType" : "Out",
+          "execPortType" : "In",
+          "typeSpec" : "Vec2"
+          },
+        {
+          "objectType" : "ExecPort",
+          "name" : "biases",
+          "nodePortType" : "Out",
+          "execPortType" : "In",
+          "typeSpec" : "Matrix"
+          }
+        ],
+      "extDeps" : {
+        "feNeuralNet" : "*"
+        },
+      "presetGUID" : "5C3397F513CE02568136CA7BC97D9A67",
+      "code" : "require feNeuralNet;
+
+dfgEntry {
+  this.setBiases(connection, biases);
+}
+"
+      },
+    "Fabric.Core.Data.Cache" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiNodeColor" : "{\n  \"r\" : 214,\n  \"g\" : 191,\n  \"b\" : 103\n  }",
+        "uiAlwaysShowDaisyChainPorts" : "true",
+        "uiHeaderColor" : "{\n  \"r\" : 188,\n  \"g\" : 129,\n  \"b\" : 83\n  }"
+        },
+      "title" : "Cache",
+      "cacheRule" : "always",
+      "ports" : [
+        {
+          "objectType" : "ExecPort",
+          "name" : "exec",
+          "nodePortType" : "IO",
+          "execPortType" : "IO",
+          "typeSpec" : "Execute"
+          },
+        {
+          "objectType" : "ExecPort",
+          "name" : "value",
+          "nodePortType" : "Out",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "D903AFD981FE9214C69943F542D5FD60",
+      "code" : "dfgEntry {
+}
+"
+      },
+    "feNeuralNet.Net.Net" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Constructs empty network\n\nSupported types:\n  result: Net\n"
+        },
+      "title" : "Net",
+      "ports" : [
+        {
+          "objectType" : "ExecPort",
+          "name" : "exec",
+          "nodePortType" : "IO",
+          "execPortType" : "IO",
+          "typeSpec" : "Execute"
+          },
+        {
+          "objectType" : "ExecPort",
+          "name" : "result",
+          "nodePortType" : "In",
+          "execPortType" : "Out",
+          "typeSpec" : "Net"
+          }
+        ],
+      "extDeps" : {
+        "feNeuralNet" : "*"
+        },
+      "presetGUID" : "E85344F42B4FB4F8C95F0E2BD088AF3B",
+      "code" : "require feNeuralNet;
+
+dfgEntry {
+  result = Net();
+}
+"
+      },
+    "feNeuralNet.Net.SetFitNetTopo" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Constructs a network with a standard fit template:\n1 input layer, N hidden layers (tansig), 1 output layer (purelin)\n\nSupported types:\n  this: Net\n  layerSize: Integer[]\n"
+        },
+      "title" : "SetFitNetTopo",
+      "ports" : [
+        {
+          "objectType" : "ExecPort",
+          "name" : "exec",
+          "nodePortType" : "IO",
+          "execPortType" : "IO",
+          "typeSpec" : "Execute"
+          },
+        {
+          "objectType" : "ExecPort",
+          "name" : "this",
+          "nodePortType" : "IO",
+          "execPortType" : "IO",
+          "typeSpec" : "Net"
+          },
+        {
+          "objectType" : "ExecPort",
+          "name" : "layerSize",
+          "nodePortType" : "Out",
+          "execPortType" : "In",
+          "typeSpec" : "Integer[]"
+          }
+        ],
+      "extDeps" : {
+        "feNeuralNet" : "*"
+        },
+      "presetGUID" : "8FF4BBDF0AAE77B4EB9F46AB8AD83A8D",
+      "code" : "require feNeuralNet;
+
+dfgEntry {
+  this.setFitNetTopo(layerSize);
+}
+"
+      }
+    }
+  }

@@ -1,0 +1,217 @@
+//
+// Developed by Gustavo E. Boehs
+//
+/**
+The Net object represents a neural network. It supports multiple outputs and hidden layers.
+All layers are assumed to be fully connected, so it is not posible to represent some
+topologies like TDNNs and Convolutional Neural Nets.
+
+Known issues:
+* softmax layer overflow
+* no processing of input/output ranges
+
+\rst
+  .. kl-example:: Net
+
+    // create a fitnet with 3 input features.
+    // 1 output feature, and 10 hidden layers.
+    Net net();
+
+    Integer neuronsPerLayer[];
+    push(3); // input
+    push(10); // hidden
+    push(1); // output
+    net.setFitNetTopo(neuronsPerLayer);
+
+\endrst
+*/
+
+// We are currently using our on Matrix implementation.
+// It is possible to move to the Mat object introduced
+// in FE2.3.1. But it needs aditional methods such as
+// fromFile, horzcat and vertcat.
+require Matrix;
+
+object Net {
+  ILayer[] layers;
+  Integer[] outputs;
+  Matrix layerWeights[Vec2];
+  Matrix biasWeights[Vec2];
+};
+
+/// Constructs empty network
+/// \dfgPresetTitle Empty_Net
+function Net() {
+}
+
+/// Constructs a network with connected, untyped layers.
+function Net(in Integer layerSize[]) {
+  for(Size i=0; i<layerSize.size()-1; i++){
+    Layer lay(layerSize[i],'purelin');
+    lay.index = i;
+    lay.parentIndex = i-1;
+    this.layers.push(lay);
+  }
+}
+
+/// Constructs a network with a standard fit template:
+/// 1 input layer, N hidden layers (tansig), 1 output layer (purelin)
+function Net.setFitNetTopo!(in Integer layerSize[]) {
+  Integer nLayers = layerSize.size();
+
+  Layer input(layerSize[0],'purelin','input');
+  input.setIndex(0);
+  input.setParentIndex(-1);
+  this.layers.push(input);
+
+  for(Size i=1; i<nLayers-1; i++){
+    Layer lay(layerSize[i],'tansig','hidden');
+    lay.setIndex(i);
+    lay.setParentIndex(i-1);
+    this.layers.push(lay);
+  }
+
+  Layer output(layerSize[nLayers-1],'purelin','output');
+  output.setIndex(nLayers-1);
+  output.setParentIndex(nLayers-2);
+  this.layers.push(output);
+
+  Integer newOut[];
+  newOut.push(output.getIndex());
+  this.outputs = newOut;
+}
+
+/// Constructs a network with a standard autoencoder template:
+/// 1 input layer, N hidden layers (logsig), 1 output layer (purelin)
+function Net.setAutoencoderTopo!(in Integer layerSize[]) {
+  Integer nLayers = layerSize.size();
+
+  Layer input(layerSize[0],'purelin','input');
+  input.setIndex(0);
+  input.setParentIndex(-1);
+  this.layers.push(input);
+
+  for(Size i=1; i<nLayers-1; i++){
+    Layer lay(layerSize[i],'logsig','hidden');
+    lay.setIndex(i);
+    lay.setParentIndex(i-1);
+    this.layers.push(lay);
+  }
+
+  Layer output(layerSize[nLayers-1],'purelin','output');
+  output.setIndex(nLayers-1);
+  output.setParentIndex(nLayers-2);
+  this.layers.push(output);
+
+  Integer newOut[];
+  newOut.push(output.getIndex());
+  this.outputs = newOut;
+}
+
+/// Constructs a network with a standard pattern recognition template:
+/// 1 input layer, N hidden layers (tansig), 1 output layer (softmax)
+function Net.setPatternNetTopo!(in Integer layerSize[]) {
+  Integer nLayers = layerSize.size();
+
+  Layer input(layerSize[0],'purelin','input');
+  input.setIndex(0);
+  input.setParentIndex(-1);
+  this.layers.push(input);
+
+  for(Size i=1; i<nLayers-1; i++){
+    Layer lay(layerSize[i],'tansig','hidden');
+    lay.setIndex(i);
+    lay.setParentIndex(i-1);
+    this.layers.push(lay);
+  }
+
+  Layer output(layerSize[nLayers-1],'softmax','output');
+  output.setIndex(nLayers-1);
+  output.setParentIndex(nLayers-2);
+  this.layers.push(output);
+
+  Integer newOut[];
+  newOut.push(output.getIndex());
+  this.outputs = newOut;
+}
+
+/// Sets the weights between connections
+/// \param connection A Vec2 where x=child, y=parent.
+/// \param weights The connection's weights
+function Net.setWeights!(Vec2 connection, Matrix weights) {
+  this.layerWeights[connection] = weights;
+}
+
+/// Sets the bias weights between connections
+/// \param connection A Vec2 where x=child, y=parent.
+/// \param weights The bias' weights
+function Net.setBiases!(Vec2 connection, Matrix biases) {
+  this.biasWeights[connection] = biases;
+}
+
+/// A recursive function used in the feedForward step.
+/// \param id The id of the evaluated layer.
+/// \param input The features being inputed for the feedForward step.
+function Matrix Net.evalLayer(Integer id, Matrix input) {
+  Matrix features;
+  Matrix output;
+  Matrix layWei;
+  Matrix biasWei;
+  Integer parent = this.layers[id].getParentIndex();
+  Boolean hasBias = false; // We assume layers have no bias.
+
+  // If layer is not connected to -1 (inputs), we
+  // need to dig recursevly.
+  if(parent != -1) {
+    // We pass the inputs until finding the layer.
+    // Eventually we should get back the values for this layer
+    // and we store it in the features values.
+    features = this.evalLayer(parent, input);
+
+    // We should also get the weights betwen this connection.
+    if(this.layerWeights.has(Vec2(id,parent)))
+      layWei = this.layerWeights[Vec2(id,parent)];
+
+    // And the biases, assuming there are any.
+    if(this.biasWeights.has(Vec2(id,parent))) {
+      biasWei = this.biasWeights[Vec2(id,parent)];
+      hasBias = true; // raise this flag for concatenations
+    }
+  }
+  // If connected to -1, this should be the input layer
+  else {
+    // if that is the case, return input values from here
+    return input;
+  }
+
+  // If we have found biases for this layer, we need
+  // to concatenate them before multipling weights.
+  if(hasBias) {
+    Matrix featBias(1, features.width); featBias.ones();
+    features.vertcat(featBias);
+    layWei.horzcat(biasWei);
+  }
+
+  // Finnally we multiply weights
+  output = layWei.multiply(features);
+
+  // We squash values based on the layers defined
+  // non-linearity.
+  String transf = this.layers[id].getTransferFunc();
+  if(transf == 'tansig')
+    output.longArray = tansig(output.longArray);
+  else if(transf == 'logsig')
+    output.longArray = logsig(output.longArray);
+  else if(transf == 'softmax')
+    output = softmax(output);
+
+  // And return values for next recursive iteration.
+  return output;
+}
+
+/// A feedForward step.
+/// \param input The features being inputed for the feedForward step.
+function Matrix Net.feedForward(Matrix input) {
+  Integer id = this.outputs[0];
+  return this.evalLayer(id, input);
+}

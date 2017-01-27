@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Constructs a network with a standard pattern recognition template:\n1 input layer, N hidden layers (tansig), 1 output layer (softmax)\n\nSupported types:\n  this: Net\n  layerSize: Integer[]\n"
+    },
+  "title" : "SetPatternNetTopo",
+  "ports" : [
+    {
+      "objectType" : "ExecPort",
+      "name" : "exec",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Execute"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "this",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Net"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "layerSize",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Integer[]"
+      }
+    ],
+  "extDeps" : {
+    "feNeuralNet" : "*"
+    },
+  "presetGUID" : "37CC51F5F2FEB7E8E858CF76428F2361",
+  "code" : "require feNeuralNet;
+
+dfgEntry {
+  this.setPatternNetTopo(layerSize);
+}
+"
+  }

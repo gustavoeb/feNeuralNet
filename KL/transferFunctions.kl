@@ -1,0 +1,64 @@
+//
+// Developed by Gustavo E. Boehs
+//
+/**
+This transfer functions are relevant for squashing values
+in a non linear fashion.
+
+Known issues:
+* softmax layer overflows with high values
+
+*/
+
+// We are currently using our on Matrix implementation.
+// It is possible to move to the Mat object introduced
+// in FE2.3.1. But it needs aditional methods such as
+// fromFile, horzcat and vertcat.
+require Matrix;
+
+/// Hyperbolic tangent sigmoid transfer function
+function Scalar[] tansig(io Scalar inputs[]) {
+  for(Size i=0; i<inputs.size(); i++){
+    inputs[i] = 2/(1+exp(-2*inputs[i]))-1;
+  }
+  return inputs;
+}
+
+/// Hyperbolic logistic sigmoid transfer function
+function Scalar[] logsig(io Scalar inputs[]) {
+  for(Size i=0; i<inputs.size(); i++){
+    inputs[i] = 1 / (1 + exp(-inputs[i]));
+  }
+  return inputs;
+}
+
+/// Softmax transfer function
+function Scalar[] softmax(io Scalar inputs[]) {
+  Scalar sum;
+  Float64 input64;
+
+  for(Size i=0; i<inputs.size(); i++){
+    input64 = inputs[i];
+    sum = sum + exp(input64);
+  }
+  for(Size i=0; i<inputs.size(); i++){
+    input64 = inputs[i];
+    inputs[i] = exp(input64)/sum;
+  }
+  return inputs;
+}
+
+/// Softmax transfer function for matrices.
+function Matrix softmax(io Matrix mat) {
+  Scalar newValues[];
+
+  for(Size i=0; i<mat.width; i++) {
+    newValues = newValues + softmax(mat.getColumn(i));
+  }
+
+  Matrix newMat(mat.width,mat.height);
+  newMat.longArray = newValues;
+  mat = newMat.transpose();
+
+  return mat;
+}

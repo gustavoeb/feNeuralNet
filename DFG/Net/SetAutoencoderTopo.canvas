@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Constructs a network with a standard autoencoder template:\n1 input layer, N hidden layers (logsig), 1 output layer (purelin)\n\nSupported types:\n  this: Net\n  layerSize: Integer[]\n"
+    },
+  "title" : "SetAutoencoderTopo",
+  "ports" : [
+    {
+      "objectType" : "ExecPort",
+      "name" : "exec",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Execute"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "this",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Net"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "layerSize",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Integer[]"
+      }
+    ],
+  "extDeps" : {
+    "feNeuralNet" : "*"
+    },
+  "presetGUID" : "0BB55B95996D79E3EA4D98F805091ADC",
+  "code" : "require feNeuralNet;
+
+dfgEntry {
+  this.setAutoencoderTopo(layerSize);
+}
+"
+  }
