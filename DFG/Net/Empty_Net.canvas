@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: ILayer\n  result: Integer\n"
+    "uiTooltip" : "Constructs empty network\n\nSupported types:\n  result: Net\n"
     },
-  "title" : "GetNeuronSize",
+  "title" : "Empty_Net",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -15,27 +15,20 @@
       },
     {
       "objectType" : "ExecPort",
-      "name" : "this",
-      "nodePortType" : "Out",
-      "execPortType" : "In",
-      "typeSpec" : "ILayer"
-      },
-    {
-      "objectType" : "ExecPort",
       "name" : "result",
       "nodePortType" : "In",
       "execPortType" : "Out",
-      "typeSpec" : "Integer"
+      "typeSpec" : "Net"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "51B4122CC37EF5C7471C1A2A5888D3C9",
+  "presetGUID" : "E85344F42B4FB4F8C95F0E2BD088AF3B",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  result = this.getNeuronSize();
+  result = Net();
 }
 "
   }

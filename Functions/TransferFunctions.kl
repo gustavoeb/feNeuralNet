@@ -10,10 +10,6 @@ Known issues:
 
 */
 
-// We are currently using our on Matrix implementation.
-// It is possible to move to the Mat object introduced
-// in FE2.3.1. But it needs aditional methods such as
-// fromFile, horzcat and vertcat.
 require Matrix;
 
 /// Hyperbolic tangent sigmoid transfer function
@@ -33,32 +29,39 @@ function Scalar[] logsig(io Scalar inputs[]) {
 }
 
 /// Softmax transfer function
-function Scalar[] softmax(io Scalar inputs[]) {
-  Scalar sum;
+function Scalar[] softmax(io Scalar input[]) {
+  Float64 sum;
   Float64 input64;
 
-  for(Size i=0; i<inputs.size(); i++){
-    input64 = inputs[i];
+  for(Size i=0; i<input.size(); i++){
+    input64 = input[i];
     sum = sum + exp(input64);
   }
-  for(Size i=0; i<inputs.size(); i++){
-    input64 = inputs[i];
-    inputs[i] = exp(input64)/sum;
+  for(Size i=0; i<input.size(); i++){
+    input64 = input[i];
+    input[i] = Scalar(exp(input64)/sum);
   }
-  return inputs;
+  return input;
 }
 
 /// Softmax transfer function for matrices.
-function Matrix softmax(io Matrix mat) {
+/// \dfgPresetOmit
+function Mat softmax(io Mat input) {
   Scalar newValues[];
 
-  for(Size i=0; i<mat.width; i++) {
-    newValues = newValues + softmax(mat.getColumn(i));
+  for(Size i=0; i<input.cols(); i++) {
+    newValues = newValues + softmax(input.getColumn(i));
   }
 
-  Matrix newMat(mat.width,mat.height);
-  newMat.longArray = newValues;
-  mat = newMat.transpose();
+  Mat newMat(input.cols(),input.rows());
+  newMat.setAll(newValues);
+  input = newMat.transpose();
 
-  return mat;
+  return input;
+}
+
+/// Softmax transfer function for matrices.
+/// \dfgPresetOmit
+function Scalar softmax(io Scalar input) {
+  return 1.0;
 }

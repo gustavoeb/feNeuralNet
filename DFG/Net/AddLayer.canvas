@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: ILayer\n  transferFunc: String\n"
+    "uiTooltip" : "Supported types:\n  this: Net\n  layer: Layer\n  id: Integer\n"
     },
-  "title" : "SetTransferFunc",
+  "title" : "AddLayer",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -18,24 +18,31 @@
       "name" : "this",
       "nodePortType" : "IO",
       "execPortType" : "IO",
-      "typeSpec" : "ILayer"
+      "typeSpec" : "Net"
       },
     {
       "objectType" : "ExecPort",
-      "name" : "transferFunc",
+      "name" : "layer",
       "nodePortType" : "Out",
       "execPortType" : "In",
-      "typeSpec" : "String"
+      "typeSpec" : "Layer"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "id",
+      "nodePortType" : "In",
+      "execPortType" : "Out",
+      "typeSpec" : "Integer"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "2DCD2DCE13E55B0E356BAF25E913FCC2",
+  "presetGUID" : "3F1277BA7D7C7B4A53B1A1E23FC998BB",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  this.setTransferFunc(transferFunc);
+  this.addLayer(layer, id);
 }
 "
   }

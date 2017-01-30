@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: ILayer\n  result: String\n"
+    "uiTooltip" : "Supported types:\n  this: Net\n"
     },
-  "title" : "GetType",
+  "title" : "SetLastAsOutput",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -16,26 +16,19 @@
     {
       "objectType" : "ExecPort",
       "name" : "this",
-      "nodePortType" : "Out",
-      "execPortType" : "In",
-      "typeSpec" : "ILayer"
-      },
-    {
-      "objectType" : "ExecPort",
-      "name" : "result",
-      "nodePortType" : "In",
-      "execPortType" : "Out",
-      "typeSpec" : "String"
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Net"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "7996BC4099589EC20A4084E09DF4BE4E",
+  "presetGUID" : "9F5E5D67AB33B7781F37F99D75A14635",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  result = this.getType();
+  this.setLastAsOutput();
 }
 "
   }

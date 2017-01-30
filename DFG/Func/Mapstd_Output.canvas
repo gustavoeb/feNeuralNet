@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Sets the weights between connections\n\nSupported types:\n  this: Net\n  connection: Vec2\n  weights: Mat\n"
+    "uiTooltip" : "Removes standard mapping from each row in a matrix, given global input ranges and local output ranges\n\nSupported types:\n  input: $TYPE$\n  means: Scalar[]\n  stds: Scalar[]\n  result: Mat\n"
     },
-  "title" : "SetWeights",
+  "title" : "Mapstd_Output",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -15,40 +15,44 @@
       },
     {
       "objectType" : "ExecPort",
-      "name" : "this",
+      "name" : "input",
       "nodePortType" : "IO",
       "execPortType" : "IO",
-      "typeSpec" : "Net"
+      "typeSpec" : "$TYPE$"
       },
     {
       "objectType" : "ExecPort",
-      "metadata" : {
-        "uiColor" : "{\n  \"r\" : 255,\n  \"g\" : 242,\n  \"b\" : 0\n  }"
-        },
-      "name" : "connection",
+      "name" : "means",
       "nodePortType" : "Out",
       "execPortType" : "In",
-      "typeSpec" : "Vec2"
+      "typeSpec" : "Scalar[]"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "stds",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Scalar[]"
       },
     {
       "objectType" : "ExecPort",
       "metadata" : {
         "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
         },
-      "name" : "weights",
-      "nodePortType" : "Out",
-      "execPortType" : "In",
+      "name" : "result",
+      "nodePortType" : "In",
+      "execPortType" : "Out",
       "typeSpec" : "Mat"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "358FD4729A701B2138666CE9CA7BCF85",
+  "presetGUID" : "9049F071B1F04B4D2A7D468D7255449D",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  this.setWeights(connection, weights);
+  result = mapstdReverse(input, means, stds);
 }
 "
   }

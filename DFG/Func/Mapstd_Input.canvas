@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "A recursive function used in the feedForward step.\n\nSupported types:\n  this: Net\n  id: Integer\n  input: Matrix\n  result: Matrix\n"
+    "uiTooltip" : "Applies standard mapping to each row in a matrix, given local input ranges and global output ranges\n\nSupported types:\n  input: $TYPE$\n  means: Scalar[]\n  stds: Scalar[]\n  result: Mat\n"
     },
-  "title" : "EvalLayer",
+  "title" : "Mapstd_Input",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -15,41 +15,44 @@
       },
     {
       "objectType" : "ExecPort",
-      "name" : "this",
-      "nodePortType" : "Out",
-      "execPortType" : "In",
-      "typeSpec" : "Net"
-      },
-    {
-      "objectType" : "ExecPort",
-      "name" : "id",
-      "nodePortType" : "Out",
-      "execPortType" : "In",
-      "typeSpec" : "Integer"
-      },
-    {
-      "objectType" : "ExecPort",
       "name" : "input",
-      "nodePortType" : "Out",
-      "execPortType" : "In",
-      "typeSpec" : "Matrix"
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "$TYPE$"
       },
     {
       "objectType" : "ExecPort",
+      "name" : "means",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Scalar[]"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "stds",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Scalar[]"
+      },
+    {
+      "objectType" : "ExecPort",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+        },
       "name" : "result",
       "nodePortType" : "In",
       "execPortType" : "Out",
-      "typeSpec" : "Matrix"
+      "typeSpec" : "Mat"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "E917C2D8CE6CE1510149A77D1EAE0103",
+  "presetGUID" : "78B6F0E72C0AAAC19A4974A0383F3161",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  result = this.evalLayer(id, input);
+  result = mapstd(input, means, stds);
 }
 "
   }

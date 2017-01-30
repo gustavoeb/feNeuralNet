@@ -4,6 +4,30 @@
 		"selected_items":
 		[
 			[
+				"min",
+				"minmaxOutput"
+			],
+			[
+				"input",
+				"inputMax"
+			],
+			[
+				"hidden",
+				"hiddenWeights"
+			],
+			[
+				"parent",
+				"parentIndex"
+			],
+			[
+				"add",
+				"addLayer"
+			],
+			[
+				"hii",
+				"hiddenWeights"
+			],
+			[
 				"track",
 				"trackValues"
 			],
@@ -195,6 +219,15 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "DFG/Func/Mapminmax_Output.canvas",
+			"settings":
+			{
+				"buffer_size": 1779,
+				"encoding": "UTF-8",
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -203,10 +236,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 357.0,
-		"last_filter": "mat",
+		"height": 78.0,
+		"last_filter": "json",
 		"selected_items":
 		[
+			[
+				"json",
+				"Set Syntax: JSON"
+			],
 			[
 				"mat",
 				"Set Syntax: MATLAB"
@@ -224,15 +261,11 @@
 				"Set Syntax: MATLAB"
 			],
 			[
-				"json",
-				"Set Syntax: JSON"
-			],
-			[
 				"matlab",
 				"Set Syntax: MATLAB"
 			]
 		],
-		"width": 382.0
+		"width": 414.0
 	},
 	"console":
 	{
@@ -252,10 +285,43 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet"
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Functions",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Objects",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Tests"
 	],
 	"file_history":
 	[
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/DFG/Func/Mapminmax_Input.canvas",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Objects/Net.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/DFG/Sim/FeedForward.canvas",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Functions/ProcessingFunctions.kl",
+		"/C/Users/gusta/Desktop/weights2.txt",
+		"/C/Users/gusta/Desktop/weights1.txt",
+		"/C/Users/gusta/Desktop/biases1.txt",
+		"/C/Users/gusta/Desktop/biases2.txt",
+		"/C/Users/gusta/Desktop/inputs.txt",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Tests/testProcessingFcn.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Functions/TransferFunctions.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/Matrix/Mat.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/feNeuralNet.fpm.json",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Objects/Layer.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/klArray/Arrays.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Tests/testLayer.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Interfaces/ILayer.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/DFG/Compounds/FitNet.canvas",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/DFG/Compounds/AutoencodeNet.canvas",
+		"/C/Users/gusta/OneDrive/Software/Portateis/Kraken/Exts/KrakenAnimation/Clips/Procedural/KrakenRotationWaveClip.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Tests/testPatternNet.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Tests/testFitNet.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Objects/InputLayer.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/FabricEngine-2.4.0-Windows-x86_64/Exts/Builtin/Characters/Skeleton.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/FabricEngine-2.4.0-Windows-x86_64/Exts/Builtin/Characters/Bone.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/Kraken/Exts/KrakenAnimation/Clips/FCurve/KrakenFCurveClip.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/Interfaces/interfaces.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/KL/Layer.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/KL/Net.kl",
+		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/feNeuralNet/KL/transferFunctions.kl",
 		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/fabricUtils/FileIO/BVHReader.kl",
 		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/fabricUtils/Kinematics/BipedRetargetingSolver.kl",
 		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/matlab/motionMap/netPose2.m",
@@ -272,7 +338,6 @@
 		"/C/Users/gusta/OneDrive/Software/Portateis/FabricEngine-2.3.1-Windows-x86_64/Exts/Builtin/Animation/KeyframeTrack.kl",
 		"/C/Users/gusta/OneDrive/Software/Portateis/FabricEngine-2.3.1-Windows-x86_64/Exts/Builtin/Animation/KeyframeTrackSet.kl",
 		"/C/Users/gusta/OneDrive/Software/Portateis/FabricEngine-2.3.1-Windows-x86_64/Exts/Builtin/Animation/Clip.kl",
-		"/C/Users/gusta/OneDrive/Software/Portateis/Kraken/Exts/KrakenAnimation/Clips/FCurve/KrakenFCurveClip.kl",
 		"/C/Users/gusta/OneDrive/Software/Portateis/Kraken/Exts/KrakenAnimation/Serialization/KrakenClipIO.kl",
 		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/fabricUtils/fabricUtils.fpm.json",
 		"/C/Users/gusta/OneDrive/Software/Portateis/Kraken/Exts/KrakenAnimation/Interfaces/KrakenClip.kl",
@@ -354,36 +419,7 @@
 		"/C/Users/gusta/OneDrive/Software/Portateis/FabricEngine-2.3.0-Windows-x86_64/Exts/Builtin/Characters/ClipPose.kl",
 		"/C/Users/gusta/OneDrive/Software/Portateis/FabricEngine-2.3.0-Windows-x86_64/Exts/Builtin/Characters/Character.kl",
 		"/C/Users/gusta/OneDrive/Software/Portateis/FabricEngine-2.3.0-Windows-x86_64/Exts/Builtin/FbxHelpers/FbxClip.kl",
-		"/C/Users/gusta/OneDrive/Software/Portateis/FabricEngine-2.3.0-Windows-x86_64/Exts/Builtin/Characters/SkinnedCharacter.kl",
-		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/Kraken/Solvers/TentacleSolver.kl",
-		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/Kraken/Solvers/KrakenSolver.kl",
-		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/iAction/WriteAtEveryFrame.kl",
-		"/C/Users/gusta/OneDrive/Software/Portateis/Kraken-develop/extras/launcher_scripts/windows/kraken_launcher.bat",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/kl/extractFeaturesFromFBX_v2.kl",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/animacao/dlabMotionLibrary/timelines/Antonio_Caminhada_dbn-test.json",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/animacao/dlabMotionLibrary/timelines/Jonathan_Caminhada_dbn-test.json",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/animacao/dlabMotionLibrary/timelines/Francisco_Caminhada_dbn-test.json",
-		"/C/Users/gusta/OneDrive/Software/Portateis/Kraken-develop/setup.py",
-		"/C/Users/gusta/Desktop/classificacao-atorA.json",
-		"/C/Users/gusta/Desktop/jonathan-nn.txt",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/matlab/v2/TestDBN.m",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/animacao/dlabMotionLibrary/timelines/Antonio_Caminhada_dbn-train.json",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/matlab/bnt/BNT/inference/online/@jtree_2TBN_inf_engine/jtree_2TBN_inf_engine.m",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/animacao/dlabMotionLibrary/timelines/Francisco_Caminhada_dbn-train.json",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/rascunho.m",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/animacao/dlabMotionLibrary/timelines/Francisco_Caminhada_dbn.json",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/animacao/dlabMotionLibrary/timelines/Francisco_Caminhada-original.json",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/animacao/dlabMotionLibrary/timelines/Antonio_Caminhada-original.json",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/animacao/dlabMotionLibrary/timelines/Antonio_Caminhada_dbn.json",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/python/Viewer/demo.canvas",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/resources/charactersStates - alternative.json",
-		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/iAction/loadClipTimelineFromTXT.kl",
-		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/iAction/loadClipTimelineFromJSON.kl",
-		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/iAction/ClipTimeline.kl",
-		"/C/Users/gusta/OneDrive/Software/Portateis/MyFabricExts/iAction/ClipEntry.kl",
-		"/C/Users/gusta/OneDrive/Software/Portateis/FabricEngine-2.2.1-Windows-x86_64/Python/2.7/FabricEngine/Canvas/CanvasWindow.py",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/python/prototype/prototype.py",
-		"/C/Users/gusta/OneDrive/Academia/Doutorado/Prototipo/python/prototype/prototypeUIWidget.py"
+		"/C/Users/gusta/OneDrive/Software/Portateis/FabricEngine-2.3.0-Windows-x86_64/Exts/Builtin/Characters/SkinnedCharacter.kl"
 	],
 	"find":
 	{
@@ -394,6 +430,7 @@
 		"height": 90.0,
 		"where_history":
 		[
+			"C:\\Users\\gusta\\OneDrive\\Software\\Portateis\\MyFabricExts\\feNeuralNet\\KL",
 			"C:\\Users\\gusta\\OneDrive\\Academia\\Doutorado\\Prototipo\\matlab\\v2",
 			"<open folders>",
 			"C:\\Users\\gusta\\OneDrive\\Software\\Portateis\\FabricEngine-2.3.0-Windows-x86_64\\Exts\\",
@@ -408,6 +445,81 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"result",
+			"resul",
+			"resu",
+			"Mat",
+			"[i]",
+			"[]",
+			"  report('xmin ' + xmin);\n  report('xmax ' + xmax);\n",
+			"io Mat input",
+			"input",
+			"minmaxOutput",
+			"input",
+			"output",
+			"outputMin",
+			"type",
+			"[i]",
+			"(i)",
+			"x",
+			"min",
+			"input",
+			"Output",
+			"x",
+			"values",
+			"max",
+			"min",
+			"Mat",
+			"mat",
+			"Mat",
+			"mat",
+			"Mat",
+			"mat",
+			"inputs",
+			"Mat",
+			"mat",
+			"encoderBias",
+			"encoderWeights",
+			"input",
+			"inputVec",
+			"inputs",
+			"addConnectedLayer",
+			"current",
+			"!",
+			"hidden",
+			"child",
+			"biases",
+			"hiddenBiases",
+			"setBiases",
+			"weights",
+			"chil",
+			"current",
+			"name",
+			"type",
+			"setType",
+			"this.type = 'unknown';",
+			"type",
+			"Type",
+			"setType",
+			"version",
+			"bias",
+			"Matrix",
+			"ones(",
+			"vals",
+			".vals)",
+			"vals",
+			"cols",
+			"rows",
+			"KL/",
+			"Matrix",
+			"rows",
+			"width",
+			"longArray",
+			"Matrix",
+			"width",
+			"height",
+			"longArray",
+			"Matrix",
 			"rotIndices",
 			"// ",
 			"chRotOrd",
@@ -460,82 +572,7 @@
 			"[Index]",
 			"[String]",
 			"String ",
-			"Index ",
-			"in",
-			"In",
-			"in",
-			"Required",
-			"in",
-			"In",
-			"in",
-			"inR",
-			"In",
-			"in",
-			"AuxilaryTo",
-			"RequiredTo",
-			"this.inRequiredTo",
-			"Bone",
-			"Required",
-			"inRequiredIds",
-			"in",
-			"World",
-			"Spine",
-			"World",
-			"Required",
-			"Parents)",
-			"outWorldParents",
-			"validFlags",
-			"outPose",
-			"this.inPose",
-			"this.validFlags",
-			"//report",
-			"validFlags",
-			"outPose",
-			"inPose",
-			"outRefPose",
-			"inRefPose",
-			"outId",
-			"inId",
-			"i",
-			"I",
-			"i",
-			"I",
-			"i",
-			"I",
-			"i",
-			"I",
-			"i",
-			"I",
-			"i",
-			"I",
-			"i",
-			"I",
-			"i",
-			"I",
-			"i",
-			"I",
-			"i",
-			"I",
-			"i",
-			"I",
-			"i",
-			"in",
-			"this.",
-			"outOrientationIds",
-			"inOrientationIds",
-			"eval",
-			"f_",
-			"ngSolver_",
-			"\\dfgPresetFolder Characters\\",
-			").",
-			"Pose(",
-			"scaleOffset",
-			"inOrientationIds",
-			".ori",
-			"Quat",
-			"in",
-			"resultPose",
-			"inPoseC"
+			"Index "
 		],
 		"highlight": true,
 		"in_selection": false,
@@ -560,8 +597,39 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "DFG/Func/Mapminmax_Output.canvas",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1779,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1546,
+								1546
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/Text/Plain text.tmLanguage",
+							"tab_size": 2,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 589.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],

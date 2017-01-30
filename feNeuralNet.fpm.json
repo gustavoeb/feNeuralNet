@@ -1,15 +1,19 @@
 {
-  "version": "0.0.1",
+  "version": "0.0.2",
   "code": [
     // interfaces
-    "KL/interfaces.kl",
+    "Interfaces/ILayer.kl",
 
     // functions
-    "KL/transferFunctions.kl",
+    "Functions/TransferFunctions.kl",
+    "Functions/ProcessingFunctions.kl",
 
     // objects
-    "KL/Layer.kl",
-    "KL/Net.kl"
+    "Objects/Layer.kl",
+    "Objects/Net.kl"
+
+    // structs
+    "Structs/Array.kl",
     ],
 
   "dfgPresets": {

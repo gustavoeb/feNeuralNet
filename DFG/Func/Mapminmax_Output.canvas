@@ -1,0 +1,68 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Applies minmax mapping to each row in a matrix, given global input ranges and local output ranges\n\nSupported types:\n  input: $TYPE$\n  minmaxInput: Vec2\n  outputMin: Scalar[]\n  outputMax: Scalar[]\n  result: Mat\n"
+    },
+  "title" : "Mapminmax_Output",
+  "ports" : [
+    {
+      "objectType" : "ExecPort",
+      "name" : "exec",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Execute"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "input",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "$TYPE$"
+      },
+    {
+      "objectType" : "ExecPort",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 255,\n  \"g\" : 242,\n  \"b\" : 0\n  }"
+        },
+      "name" : "minmaxInput",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Vec2"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "outputMin",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Scalar[]"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "outputMax",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Scalar[]"
+      },
+    {
+      "objectType" : "ExecPort",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+        },
+      "name" : "result",
+      "nodePortType" : "In",
+      "execPortType" : "Out",
+      "typeSpec" : "$TYPE$"
+      }
+    ],
+  "extDeps" : {
+    "feNeuralNet" : "*"
+    },
+  "presetGUID" : "D3475B0F4F43347B180BB53B366C1FA9",
+  "code" : "require feNeuralNet;
+
+dfgEntry {
+  result = mapminmax(input, minmaxInput, outputMin, outputMax);
+}
+"
+  }

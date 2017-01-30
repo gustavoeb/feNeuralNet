@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Softmax transfer function\n\nSupported types:\n  inputs: Scalar[]\n  result: Scalar[]\n"
+    "uiTooltip" : "Softmax transfer function\n\nSupported types:\n  input: Scalar[]\n  result: Scalar[]\n"
     },
   "title" : "Softmax",
   "ports" : [
@@ -15,7 +15,7 @@
       },
     {
       "objectType" : "ExecPort",
-      "name" : "inputs",
+      "name" : "input",
       "nodePortType" : "IO",
       "execPortType" : "IO",
       "typeSpec" : "Scalar[]"
@@ -31,11 +31,11 @@
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "1A72181B025E7FF24A7CFF7ABC589604",
+  "presetGUID" : "473340F268345EA2F797CF164782C3CB",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  result = softmax(inputs);
+  result = softmax(input);
 }
 "
   }

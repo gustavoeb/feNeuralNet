@@ -1,0 +1,33 @@
+require feNeuralNet;
+
+operator entry() {
+	Scalar values[];
+	values.push(1);
+	values.push(10);
+	values.push(100);
+
+	report(mapminmax(values));
+
+	Scalar values1[];
+	values1.push(1);
+	values1.push(10);
+	values1.push(100);
+	values1.push(-100);
+	values1.push(200);
+	report(mapminmax(values1, Vec2(1.0,100.0), Vec2(-1.0,1.0)));
+
+	Mat mat(2,3);
+	mat.set(0,8);
+	mat.set(1,1);
+	mat.set(2,6);
+	mat.set(3,3);
+	mat.set(4,5);
+	mat.set(5,7);
+	Scalar inputMin[];
+	inputMin.push(1.0);
+	inputMin.push(3.0);
+	Scalar inputMax[];
+	inputMax.push(8.0);
+	inputMax.push(7.0);
+	report(mapminmax(mat, inputMin, inputMax, Vec2(-1.0,1.0)));
+}

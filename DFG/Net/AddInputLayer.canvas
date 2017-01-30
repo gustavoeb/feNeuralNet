@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Constructs a network with a standard pattern recognition template:\n1 input layer, N hidden layers (tansig), 1 output layer (softmax)\n\nSupported types:\n  this: Net\n  layerSize: Integer[]\n"
+    "uiTooltip" : "Supported types:\n  this: Net\n  layer: Layer\n  id: Integer\n"
     },
-  "title" : "SetPatternNetTopo",
+  "title" : "AddInputLayer",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -22,20 +22,27 @@
       },
     {
       "objectType" : "ExecPort",
-      "name" : "layerSize",
+      "name" : "layer",
       "nodePortType" : "Out",
       "execPortType" : "In",
-      "typeSpec" : "Integer[]"
+      "typeSpec" : "Layer"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "id",
+      "nodePortType" : "In",
+      "execPortType" : "Out",
+      "typeSpec" : "Integer"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "37CC51F5F2FEB7E8E858CF76428F2361",
+  "presetGUID" : "84E99DE58C9D5A3FB726D2991A0EFA9E",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  this.setPatternNetTopo(layerSize);
+  this.addInputLayer(layer, id);
 }
 "
   }

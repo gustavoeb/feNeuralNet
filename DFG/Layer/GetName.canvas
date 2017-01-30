@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: ILayer\n  transferFunc: String\n"
+    "uiTooltip" : "Gets the layer's name.\n\nSupported types:\n  this: Layer\n  result: String\n"
     },
-  "title" : "SetType",
+  "title" : "GetName",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -16,26 +16,26 @@
     {
       "objectType" : "ExecPort",
       "name" : "this",
-      "nodePortType" : "IO",
-      "execPortType" : "IO",
-      "typeSpec" : "ILayer"
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Layer"
       },
     {
       "objectType" : "ExecPort",
-      "name" : "transferFunc",
-      "nodePortType" : "Out",
-      "execPortType" : "In",
+      "name" : "result",
+      "nodePortType" : "In",
+      "execPortType" : "Out",
       "typeSpec" : "String"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "10FA259E5C5FACA6D75493A81E4982DF",
+  "presetGUID" : "75587488EDBB49CDF5226CCE631BCD2F",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  this.setType(transferFunc);
+  result = this.getName();
 }
 "
   }

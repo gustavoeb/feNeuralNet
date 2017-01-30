@@ -2,10 +2,9 @@
 // Developed by Gustavo E. Boehs
 //
 /**
-The Layer object represents a neural network's layers. It can be of three types
-('input', 'hidden', or 'output'), and supports 4 transfer functions (linear,
-tangent sigmoid, logistic sigmoid and softmax).
-Multiple layers are connected in a Net object
+The Layer object represents a neural network's layers. It supports
+4 transfer functions (linear, tangent sigmoid, logistic sigmoid and softmax).
+Multiple layers are connected in a Net object.
 
 \rst
   .. kl-example:: Layer
@@ -21,32 +20,54 @@ Multiple layers are connected in a Net object
 \endrst
 */
 
-// We are currently using our on Matrix implementation.
-// It is possible to move to the Mat object introduced
-// in FE2.3.1. But it needs aditional methods such as
-// fromFile, horzcat and vertcat.
-require Matrix;
-
 object Layer : ILayer {
+  String name;
   Integer index;
   Integer parentIndex;
   Integer neurons;
   String transferFunc;
-  String type;
 };
 
+/// Constructs an empty layer
+/// \dfgPresetOmit
+function Layer() {
+  this.setTransferFunc('purelin');
+}
+
+/// Constructs a named layer
+/// \dfgPresetOmit
+function Layer(String name) {
+  this.setTransferFunc('purelin');
+  this.setName(name);
+}
+
+/// Constructs a n sized layer
+/// \dfgPresetOmit
+function Layer(Integer neurons) {
+  this.setTransferFunc('purelin');
+  this.setNeuronSize(neurons);
+}
+
+/// Constructs named layer based on number of neurons
+/// \dfgPresetOmit
+function Layer(String name, Integer neurons) {
+  this.setTransferFunc('purelin');
+  this.setName(name);
+  this.setNeuronSize(neurons);
+}
+
 /// Constructs a layer based on number of neurons and transfer function
+/// \dfgPresetOmit
 function Layer(Integer neurons, String transferFunc) {
   this.setTransferFunc(transferFunc);
   this.setNeuronSize(neurons);
-  this.type = 'unknown';
 }
 
-/// Constructs a layer based on number of neurons, transfer function, and type
-function Layer(Integer neurons, String transferFunc, String type) {
+/// Constructs a layer based on name, number of neurons, and transfer function
+function Layer(String name, Integer neurons, String transferFunc) {
   this.setTransferFunc(transferFunc);
   this.setNeuronSize(neurons);
-  this.setType(type);
+  this.setName(name);
 }
 
 /// Resizes a layer.
@@ -77,26 +98,18 @@ function String Layer.getTransferFunc() {
   return this.transferFunc;
 }
 
-/// Sets the layer type.
-function Layer.setType!(String type) {
-  Integer supportedTypes[String];
-  supportedTypes['input'] = 0;
-  supportedTypes['hidden'] = 1;
-  supportedTypes['output'] = 2;
-
-  if (~supportedTypes.has(type))
-    setError('Type ' + type + ' is not supported.');
-  else
-    this.type = type;
+/// Sets the layer's name.
+function Layer.setName!(in String name) {
+  this.name = name;
 }
 
-/// Gets the layer type.
-function String Layer.getType() {
-  return this.type;
+/// Gets the layer's name.
+function String Layer.getName() {
+  return this.name;
 }
 
 /// Sets the layer index.
-function Layer.setIndex!(Integer index) {
+function Layer.setIndex!(in Integer index) {
   this.index = index;
 }
 
@@ -106,7 +119,7 @@ function Integer Layer.getIndex() {
 }
 
 /// Connects the layer to a parent.
-function Layer.setParentIndex!(Integer index) {
+function Layer.setParentIndex!(in Integer index) {
   this.parentIndex = index;
 }
 

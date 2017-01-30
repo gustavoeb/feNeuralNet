@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Sets the weights between connections\n\nSupported types:\n  this: Net\n  connection: Vec2\n  weights: Mat\n"
+    "uiTooltip" : "Supported types:\n  this: Net\n  layer: Layer\n  weights: Mat\n  bias: Mat\n  id: Integer\n"
     },
-  "title" : "SetWeights",
+  "title" : "AddConnecterLayer_WeightsAndBias",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -22,13 +22,10 @@
       },
     {
       "objectType" : "ExecPort",
-      "metadata" : {
-        "uiColor" : "{\n  \"r\" : 255,\n  \"g\" : 242,\n  \"b\" : 0\n  }"
-        },
-      "name" : "connection",
+      "name" : "layer",
       "nodePortType" : "Out",
       "execPortType" : "In",
-      "typeSpec" : "Vec2"
+      "typeSpec" : "Layer"
       },
     {
       "objectType" : "ExecPort",
@@ -39,16 +36,33 @@
       "nodePortType" : "Out",
       "execPortType" : "In",
       "typeSpec" : "Mat"
+      },
+    {
+      "objectType" : "ExecPort",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+        },
+      "name" : "bias",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Mat"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "id",
+      "nodePortType" : "In",
+      "execPortType" : "Out",
+      "typeSpec" : "Integer"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "358FD4729A701B2138666CE9CA7BCF85",
+  "presetGUID" : "16470E3ADBDD0CAD5563EDAE4393FA9F",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  this.setWeights(connection, weights);
+  this.addConnectedLayer(layer, weights, bias, id);
 }
 "
   }

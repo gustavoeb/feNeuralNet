@@ -1,0 +1,240 @@
+//
+// Developed by Gustavo E. Boehs
+//
+/**
+The Net object represents a neural network. It supports multiple outputs and hidden layers.
+All layers are assumed to be fully connected, so it is not posible to represent some
+topologies like TDNNs and Convolutional Neural Nets.
+
+Known issues:
+* softmax layer overflow
+* no processing of input/output ranges
+
+\rst
+  .. kl-example:: Net
+
+    // create a fitnet with 3 input features.
+    // 1 output feature, and 10 hidden layers.
+    Net net();
+    Layer input('input',3);
+    Layer hidden('hidden',10,'tansig');
+    Layer output('output',1);
+    net.addInputLayer(input);
+    net.addConnectedLayer(hidden);
+    net.setOutput(net.addConnectedLayer(output));
+
+\endrst
+*/
+
+require Matrix;
+
+object Net {
+  Layer[] layers;
+  Integer[] inputs;
+  Integer[] outputs;
+  Mat layerWeights[Vec2];
+  Mat biasWeights[Vec2];
+};
+
+/// Constructs empty network
+/// \dfgPresetTitle Empty_Net
+function Net() {
+}
+
+function Net.addLayer!(in Layer layer, out Integer id) {
+  // get current layer id
+  id = this.layers.size();
+  Layer cLayer = layer.clone();
+  // add layer
+  this.layers.push(cLayer.setIndex(id));
+}
+
+/// Sets the weights between connections
+/// \param connection A Vec2 where x=child, y=parent.
+/// \param weights The connection's weights
+function Net.setWeights!(Vec2 connection, Mat weights) {
+  Integer child = connection.x;
+  Integer parent = connection.y;
+
+  // check if layers exist
+  if(child >= this.layers.size())
+    throw FUNC + ": layer id (" + child + ") does not exist in this network.";
+
+  // check dimentions
+  Integer rows = this.layers[child].getNeuronSize();
+  Integer cols = this.layers[parent].getNeuronSize();
+  if(weights.cols() != cols || weights.rows() != rows)
+    throw FUNC + "weight matrix does not match layers' dimentions (" + rows + ", " + cols + " vs " + weights.rows() + ", " + weights.cols() + ")";
+
+  // and add connections
+  this.layerWeights[connection] = weights;
+}
+
+/// Sets the bias weights between connections
+/// \param connection A Vec2 where x=child, y=parent.
+/// \param weights The bias' weights
+function Net.setBias!(Vec2 connection, Mat bias) {
+  Integer child = connection.x;
+  Integer parent = connection.y;
+
+  // check if layers exist
+  if(child >= this.layers.size())
+    throw FUNC + ": layer id (" + child + ") does not exist in this network.";
+
+  // check dimentions
+  Integer rows = this.layers[child].getNeuronSize();
+  if(bias.cols() != 1 || bias.rows() != rows)
+    throw FUNC + "bias weight matrix does not match layers' dimentions (" + rows + ", 1 vs " + bias.rows() + ", " + bias.cols() + ")";
+
+  // and add connections
+  this.biasWeights[connection] = bias;
+}
+
+function Net.addInputLayer!(in Layer layer, out Integer id) {
+  Layer cLayer = layer.clone();
+  // add layer
+  this.addLayer(cLayer.setParentIndex(-1), id); // inputs have -1 as parents
+  // aditionaly we store their indices;
+  this.inputs.push(id);
+}
+
+/// \dfgPresetOmit
+function Net.addConnectedLayer!(in Layer layer, out Integer id) {
+  Integer child = this.layers.size();
+  Integer parent = child-1;
+  Layer cLayer = layer.clone();
+
+  // check for previous layers
+  if(child == 0)
+    throw FUNC + "can't connect layers in an empty network. Add an input layer first.";
+    
+  // add layer
+  this.addLayer(cLayer.setParentIndex(parent), id);
+}
+
+/// \dfgPresetTitle AddConnecterLayer_Weights
+function Net.addConnectedLayer!(in Layer layer, in Mat weights, out Integer id) {
+  Integer child = this.layers.size();
+  Integer parent = child-1;
+
+  this.addConnectedLayer(layer, id);
+
+  // add weights
+  this.setWeights(Vec2(Scalar(child),Scalar(parent)), weights);
+}
+
+/// \dfgPresetTitle AddConnecterLayer_WeightsAndBias
+function Net.addConnectedLayer!(in Layer layer, in Mat weights, in Mat bias, out Integer id) {
+  Integer child = this.layers.size();
+  Integer parent = child-1;
+
+  this.addConnectedLayer(layer, weights, id);
+
+  // add weights
+  this.setBias(Vec2(Scalar(id),Scalar(parent)), bias);
+}
+
+function Net.setOutput!(Integer id) {
+  // check if layers exists
+  if(id >= this.layers.size())
+    throw FUNC + ": layer id (" + id + ") does not exist in this network.";
+
+  this.outputs.push(id);
+}
+
+function Net.setLastAsOutput!() {
+  // check if layers exists
+  if(this.layers.size() <= 0)
+    throw FUNC + ": network has no layers.";
+
+  this.outputs.push(this.layers.size()-1);
+}
+
+/// A recursive function used in the feedForward step.
+/// \param id The id of the evaluated layer.
+/// \param input The features being inputed for the feedForward step.
+/// \dfgPresetOmit
+function Mat Net.evalLayer(Integer id, Mat input) {
+  Mat features;
+  Mat output;
+  Mat layWei;
+  Mat biasWei;
+  Integer parent = this.layers[id].getParentIndex();
+  Boolean hasBias = false; // We assume layers have no bias.
+
+  // If layer is not connected to -1 (inputs), we
+  // need to dig recursevly.
+  if(parent != -1) {
+    // We pass the inputs until finding the layer.
+    // Eventually we should get back the values for this layer
+    // and we store it in the features values.
+    features = this.evalLayer(parent, input);
+
+    // We should also get the weights betwen this connection.
+    if(this.layerWeights.has(Vec2(id,parent)))
+      layWei = this.layerWeights[Vec2(id,parent)];
+
+    // And the bias, assuming there are any.
+    if(this.biasWeights.has(Vec2(id,parent))) {
+      biasWei = this.biasWeights[Vec2(id,parent)];
+      hasBias = true; // raise this flag for concatenations
+    }
+  }
+  // If connected to -1, this should be the input layer
+  else {
+    // if that is the case, return input values from here
+    return input;
+  }
+
+  // If we have found bias for this layer, we need
+  // to concatenate them before multipling weights.
+  if(hasBias) {
+    Mat featBias(1, features.cols()); featBias.setAll(1.0);
+    features.vertcat(featBias);
+    layWei.horzcat(biasWei);
+  }
+
+  // Finnally we multiply weights
+  output = layWei * features;
+
+  // We squash values based on the layers defined
+  // non-linearity.
+  String transf = this.layers[id].getTransferFunc();
+  if(transf == 'tansig')
+    output.setAll(tansig(output.getAll()));
+  else if(transf == 'logsig')
+    output.setAll(logsig(output.getAll()));
+  else if(transf == 'softmax')
+    output = softmax(output);
+
+  // And return values for next recursive iteration.
+  return output;
+}
+
+/// A feedForward step.
+/// \param input The features being inputed for the feedForward step.
+/// \dfgPresetTitle FeedForward
+/// \dfgPresetFolder Sim
+/// \dfgPresetType input $TYPE$
+/// \dfgPresetOmit
+function Mat Net.feedForward(Mat input) {
+  Integer id = this.outputs[0];
+  return this.evalLayer(id, input);
+}
+
+/// A feedForward step.
+/// \param input The features being inputed for the feedForward step.
+/// \dfgPresetOmit
+function Scalar[] Net.feedForward(Scalar input[]) {
+  // for now we only support one output
+  // this should be substituted by a for loop
+  Integer id = this.outputs[0];
+
+  // we construct a single column matrix from our input vector
+  Integer elements = input.size();
+  Mat mat(elements,1);
+  mat.setAll(input);
+
+  // and return a vector
+  return this.evalLayer(id, mat).getAll();
+}

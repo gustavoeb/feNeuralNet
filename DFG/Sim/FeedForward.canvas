@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "A feedForward step.\n\nSupported types:\n  this: Net\n  input: Matrix\n  result: Matrix\n"
+    "uiTooltip" : "A feedForward step.\n\nSupported types:\n  this: Net\n  input: $TYPE$\n  result: Mat\n"
     },
   "title" : "FeedForward",
   "ports" : [
@@ -25,20 +25,23 @@
       "name" : "input",
       "nodePortType" : "Out",
       "execPortType" : "In",
-      "typeSpec" : "Matrix"
+      "typeSpec" : "$TYPE$"
       },
     {
       "objectType" : "ExecPort",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+        },
       "name" : "result",
       "nodePortType" : "In",
       "execPortType" : "Out",
-      "typeSpec" : "Matrix"
+      "typeSpec" : "$TYPE$"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "FCC28B9C4477C2BCBCD55A5889FC905A",
+  "presetGUID" : "C80BDEB4CA8049E5E57F3B34B705A3F3",
   "code" : "require feNeuralNet;
 
 dfgEntry {

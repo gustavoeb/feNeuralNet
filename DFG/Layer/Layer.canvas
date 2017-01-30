@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Constructs a layer based on number of neurons, transfer function, and type\n\nSupported types:\n  neurons: Integer\n  transferFunc: String\n  type: String\n  result: Layer\n"
+    "uiTooltip" : "Constructs a layer based on name, number of neurons, and transfer function\n\nSupported types:\n  name: String\n  neurons: Integer\n  transferFunc: String\n  result: Layer\n"
     },
   "title" : "Layer",
   "ports" : [
@@ -12,6 +12,13 @@
       "nodePortType" : "IO",
       "execPortType" : "IO",
       "typeSpec" : "Execute"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "name",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "String"
       },
     {
       "objectType" : "ExecPort",
@@ -29,13 +36,6 @@
       },
     {
       "objectType" : "ExecPort",
-      "name" : "type",
-      "nodePortType" : "Out",
-      "execPortType" : "In",
-      "typeSpec" : "String"
-      },
-    {
-      "objectType" : "ExecPort",
       "name" : "result",
       "nodePortType" : "In",
       "execPortType" : "Out",
@@ -45,11 +45,11 @@
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "A0439077A2E6967CE60F22C730EE25BF",
+  "presetGUID" : "E323035F7DCC557E2189018C2E521C90",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  result = Layer(neurons, transferFunc, type);
+  result = Layer(name, neurons, transferFunc);
 }
 "
   }

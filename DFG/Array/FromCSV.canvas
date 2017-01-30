@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Gets the layer type.\n\nSupported types:\n  this: Layer\n  result: String\n"
+    "uiTooltip" : "Supported types:\n  file: FilePath\n  result: Scalar[]\n"
     },
-  "title" : "GetType",
+  "title" : "FromCSV",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -15,27 +15,27 @@
       },
     {
       "objectType" : "ExecPort",
-      "name" : "this",
+      "name" : "file",
       "nodePortType" : "Out",
       "execPortType" : "In",
-      "typeSpec" : "Layer"
+      "typeSpec" : "FilePath"
       },
     {
       "objectType" : "ExecPort",
       "name" : "result",
       "nodePortType" : "In",
       "execPortType" : "Out",
-      "typeSpec" : "String"
+      "typeSpec" : "Scalar[]"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "D9010860C0B2027D6E60489DE57D51CC",
+  "presetGUID" : "35D9F03EB550A1D36E5417C8FB10C6F6",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  result = this.getType();
+  result = fromCSV(file);
 }
 "
   }

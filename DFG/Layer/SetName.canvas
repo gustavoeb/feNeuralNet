@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: ILayer\n  neurons: Integer\n"
+    "uiTooltip" : "Sets the layer's name.\n\nSupported types:\n  this: Layer\n  name: String\n"
     },
-  "title" : "SetNeuronSize",
+  "title" : "SetName",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -18,24 +18,24 @@
       "name" : "this",
       "nodePortType" : "IO",
       "execPortType" : "IO",
-      "typeSpec" : "ILayer"
+      "typeSpec" : "Layer"
       },
     {
       "objectType" : "ExecPort",
-      "name" : "neurons",
+      "name" : "name",
       "nodePortType" : "Out",
       "execPortType" : "In",
-      "typeSpec" : "Integer"
+      "typeSpec" : "String"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "EA7FEA72D7E07B3D8F8B6C973CEF1CAB",
+  "presetGUID" : "396A7FB13863BE8603448ABDE3AA133D",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  this.setNeuronSize(neurons);
+  this.setName(name);
 }
 "
   }

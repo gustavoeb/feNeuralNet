@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Sets the weights between connections\n\nSupported types:\n  this: Net\n  connection: Vec2\n  weights: Mat\n"
+    "uiTooltip" : "Sets the bias weights between connections\n\nSupported types:\n  this: Net\n  connection: Vec2\n  bias: Mat\n"
     },
-  "title" : "SetWeights",
+  "title" : "SetBias",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -35,7 +35,7 @@
       "metadata" : {
         "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
         },
-      "name" : "weights",
+      "name" : "bias",
       "nodePortType" : "Out",
       "execPortType" : "In",
       "typeSpec" : "Mat"
@@ -44,11 +44,11 @@
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "358FD4729A701B2138666CE9CA7BCF85",
+  "presetGUID" : "64E5E94B54A960A9A11A77DEFDDC57AA",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  this.setWeights(connection, weights);
+  this.setBias(connection, bias);
 }
 "
   }
