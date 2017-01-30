@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  file: FilePath\n  result: Scalar[]\n"
+    },
+  "title" : "ArrayFromCSV",
+  "ports" : [
+    {
+      "objectType" : "ExecPort",
+      "name" : "exec",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Execute"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "file",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "FilePath"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "result",
+      "nodePortType" : "In",
+      "execPortType" : "Out",
+      "typeSpec" : "Scalar[]"
+      }
+    ],
+  "extDeps" : {
+    "feNeuralNet" : "*"
+    },
+  "presetGUID" : "4CAF9C8D1F0ABC5AF04F04237AE27457",
+  "code" : "require feNeuralNet;
+
+dfgEntry {
+  result = ArrayFromCSV(file);
+}
+"
+  }

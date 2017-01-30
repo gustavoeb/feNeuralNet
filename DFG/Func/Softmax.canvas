@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Softmax transfer function\n\nSupported types:\n  input: Scalar[]\n  result: Scalar[]\n"
+    },
+  "title" : "Softmax",
+  "ports" : [
+    {
+      "objectType" : "ExecPort",
+      "name" : "exec",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Execute"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "input",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Scalar[]"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "result",
+      "nodePortType" : "In",
+      "execPortType" : "Out",
+      "typeSpec" : "Scalar[]"
+      }
+    ],
+  "extDeps" : {
+    "feNeuralNet" : "*"
+    },
+  "presetGUID" : "473340F268345EA2F797CF164782C3CB",
+  "code" : "require feNeuralNet;
+
+dfgEntry {
+  result = softmax(input);
+}
+"
+  }

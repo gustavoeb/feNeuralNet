@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "This transfer functions are relevant for squashing values\nin a non linear fashion.\n\nKnown issues:\nsoftmax layer overflows with high values\n\n\nHyperbolic tangent sigmoid transfer function\n\nSupported types:\n  inputs: Scalar[]\n  result: Scalar[]\n"
+    },
+  "title" : "Tansig",
+  "ports" : [
+    {
+      "objectType" : "ExecPort",
+      "name" : "exec",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Execute"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "inputs",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Scalar[]"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "result",
+      "nodePortType" : "In",
+      "execPortType" : "Out",
+      "typeSpec" : "Scalar[]"
+      }
+    ],
+  "extDeps" : {
+    "feNeuralNet" : "*"
+    },
+  "presetGUID" : "B10B8CF036555F13B90737C1916B974A",
+  "code" : "require feNeuralNet;
+
+dfgEntry {
+  result = tansig(inputs);
+}
+"
+  }

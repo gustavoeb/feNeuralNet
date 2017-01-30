@@ -1,0 +1,15 @@
+/// An interface for different types of neural network layers
+/// \dfgPresetOmit
+/// \dfgPresetOmit
+interface ILayer {
+  setNeuronSize!(in Integer neurons);
+  setTransferFunc!(in String transferFunc);
+  setName!(in String name);
+  setIndex!(in Integer index);
+  setParentIndex!(in Integer index);
+  Integer getNeuronSize();
+  String getTransferFunc();
+  String getName();
+  Integer getIndex();
+  Integer getParentIndex();
+};

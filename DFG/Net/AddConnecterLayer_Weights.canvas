@@ -1,0 +1,58 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Supported types:\n  this: Net\n  layer: Layer\n  weights: Mat\n  id: Integer\n"
+    },
+  "title" : "AddConnecterLayer_Weights",
+  "ports" : [
+    {
+      "objectType" : "ExecPort",
+      "name" : "exec",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Execute"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "this",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Net"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "layer",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Layer"
+      },
+    {
+      "objectType" : "ExecPort",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+        },
+      "name" : "weights",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Mat"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "id",
+      "nodePortType" : "In",
+      "execPortType" : "Out",
+      "typeSpec" : "Integer"
+      }
+    ],
+  "extDeps" : {
+    "feNeuralNet" : "*"
+    },
+  "presetGUID" : "9F1C10A31D952B38B1E08037E2539306",
+  "code" : "require feNeuralNet;
+
+dfgEntry {
+  this.addConnectedLayer(layer, weights, id);
+}
+"
+  }

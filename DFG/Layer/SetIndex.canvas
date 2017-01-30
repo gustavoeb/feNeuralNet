@@ -1,0 +1,41 @@
+// Created by kl2dfg (processFunction)
+{
+  "objectType" : "Func",
+  "metadata" : {
+    "uiTooltip" : "Sets the layer index.\n\nSupported types:\n  this: Layer\n  index: Integer\n"
+    },
+  "title" : "SetIndex",
+  "ports" : [
+    {
+      "objectType" : "ExecPort",
+      "name" : "exec",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Execute"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "this",
+      "nodePortType" : "IO",
+      "execPortType" : "IO",
+      "typeSpec" : "Layer"
+      },
+    {
+      "objectType" : "ExecPort",
+      "name" : "index",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "Integer"
+      }
+    ],
+  "extDeps" : {
+    "feNeuralNet" : "*"
+    },
+  "presetGUID" : "7FEC2C70DD044557FFAFE6DFAD49E7E7",
+  "code" : "require feNeuralNet;
+
+dfgEntry {
+  this.setIndex(index);
+}
+"
+  }

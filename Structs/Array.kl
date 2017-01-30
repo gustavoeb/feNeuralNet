@@ -1,0 +1,16 @@
+/// \dfgPresetFolder Array
+function Scalar[] ArrayFromCSV(FilePath file) {
+  if(!file.exists())
+    throw FUNC + ": file " + file + " does not exist.";
+  if(!file.extension())
+    throw FUNC + ": file " + file + " extension not supported.";
+  TextReader reader = TextReader(file.string());
+  String row[] = reader.readLine().split(',');
+  reader.seek(0);
+  String all[] = reader.readAll().splitAny(',\n');
+  Scalar allScalars[];
+  for (Integer i = 0; i < all.size()-1; i++) {
+      allScalars.push(all[i].toScalar());
+  }
+  return allScalars;
+}

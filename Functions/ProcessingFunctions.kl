@@ -1,0 +1,193 @@
+// *****************
+// *** Mapminmax ***
+// *****************
+
+/// Applies minmax mapping, given input and output ranges
+/// \dfgPresetOmit
+function Scalar mapminmax(io Scalar input, in Vec2 minmaxInput, in Vec2 minmaxOutput) {
+  Scalar xmin = minmaxInput.x;
+  Scalar xmax = minmaxInput.y;
+  Scalar ymin = minmaxOutput.x;
+  Scalar ymax = minmaxOutput.y;
+
+  input = (ymax-ymin)*(input-xmin)/(xmax-xmin) + ymin;
+  return input;
+}
+
+/// Applies minmax mapping, given input and output ranges
+/// \dfgPresetOmit
+function Scalar[] mapminmax(io Scalar input[], in Vec2 minmaxInput, in Vec2 minmaxOutput) {
+
+  for (Size i=0;i<input.size();i++) {
+    input[i] = mapminmax(input[i], minmaxInput, minmaxOutput);
+  }
+
+  return input;
+}
+
+/// Applies minmax mapping, given an output range
+/// \dfgPresetOmit
+function Scalar[] mapminmax(io Scalar input[], in Vec2 minmaxOutput) {
+  Scalar ymin = minmaxOutput.x;
+  Scalar ymax = minmaxOutput.y;
+
+  // if no min max input is given, get from all inputs
+  Scalar xmin = input[0];
+  Scalar xmax = input[0];
+  for (Size i=1;i<input.size();i++) {
+    if (input[i] < xmin)
+      xmin = input[i];
+    else if (input[i] > xmax)
+      xmax = input[i];
+  }
+
+  // apply minmax
+  mapminmax(input, Vec2(xmin,xmax), Vec2(ymin,ymax));
+
+  return input;
+}
+
+/// Applies minmax mapping using -1,1 as output range
+/// \dfgPresetOmit
+function Scalar[] mapminmax(io Scalar input[]) {
+  // if no min max output is given assume -1,1 range
+  mapminmax(input, Vec2(-1,1));
+  return input;
+}
+
+/// Applies minmax mapping to each row in a matrix, given local input and output ranges
+/// \dfgPresetOmit
+function Mat mapminmax(io Mat input, Scalar inputMin[], Scalar inputMax[], Scalar outputMin[], Scalar outputMax[]) {
+  for(Size i=0; i<input.rows(); i++) {
+    input.setRow(i, mapminmax(input.getRow(i), Vec2(inputMin[i],inputMax[i]), Vec2(outputMin[i],outputMax[i])));
+  }
+  return input;
+}
+
+/// Applies minmax mapping to each row in a matrix, given local input ranges and global output ranges
+/// \dfgPresetTitle Mapminmax_Input
+/// \dfgPresetType input $TYPE$
+/// \dfgPresetOmit
+function Mat mapminmax(io Mat input, Scalar inputMin[], Scalar inputMax[], Vec2 minmaxOutput) {
+  for(Size i=0; i<input.rows(); i++) {
+    input.setRow(i, mapminmax(input.getRow(i), Vec2(inputMin[i],inputMax[i]), minmaxOutput));
+  }
+  return input;
+}
+
+/// Applies minmax mapping to each row in a matrix, given global input ranges and local output ranges
+/// \dfgPresetTitle Mapminmax_Output
+/// \dfgPresetType input $TYPE$
+/// \dfgPresetOmit
+function Mat mapminmax(io Mat input, Vec2 minmaxInput, Scalar outputMin[], Scalar outputMax[]) {
+  for(Size i=0; i<input.rows(); i++) {
+    input.setRow(i, mapminmax(input.getRow(i), minmaxInput, Vec2(outputMin[i],outputMax[i])));
+  }
+  return input;
+}
+
+/// Applies minmax mapping to a array (as a column vector), given local input ranges and global output ranges
+/// \dfgPresetOmit
+function Scalar[] mapminmax(io Scalar input[], Scalar inputMin[], Scalar inputMax[], Vec2 minmaxOutput) {
+  for(Size i=0; i<input.size(); i++) {
+    input[i] = mapminmax(input[i], Vec2(inputMin[i],inputMax[i]), minmaxOutput);
+  }
+  return input;
+}
+
+/// Applies minmax mapping to a array (as a column vector), given global input ranges and local output ranges
+/// \dfgPresetOmit
+function Scalar[] mapminmax(io Scalar input[], Vec2 minmaxInput, Scalar outputMin[], Scalar outputMax[]) {
+  for(Size i=0; i<input.size(); i++) {
+    input[i] = mapminmax(input[i], minmaxInput, Vec2(outputMin[i],outputMax[i]));
+  }
+  return input;
+}
+
+/// Applies minmax mapping to each row in a matrix
+/// \dfgPresetOmit
+function Mat mapminmax(io Mat input) {
+  for(Size i=0; i<input.rows(); i++) {
+    input.setRow(i, mapminmax(input.getRow(i)));
+  }
+  return input;
+}
+
+// **************
+// *** Mapstd ***
+// **************
+
+/// Applies standard mapping, given input and output ranges
+/// \dfgPresetOmit
+function Scalar mapstd(io Scalar input, in Scalar mean, in Scalar std) {
+  input = (input-mean)*(1/(std+0.000000000000000000000000000000000001));
+  return input;
+}
+
+/// Removes standard mapping, given input and output ranges
+/// \dfgPresetOmit
+function Scalar mapstdReverse(io Scalar input, in Scalar mean, in Scalar std) {
+  input = (input*std)+mean;
+  return input;
+}
+
+/// Applies standard mapping, given input and output ranges
+/// \dfgPresetOmit
+function Scalar[] mapstd(io Scalar input[], in Scalar mean, in Scalar std) {
+  // apply mapping
+  for (Size i=0;i<input.size();i++) {
+    input[i] = mapstd(input[i], mean, std);
+  }
+
+  return input;
+}
+
+/// Removes standard mapping, given input and output ranges
+/// \dfgPresetOmit
+function Scalar[] mapstdReverse(io Scalar input[], in Scalar mean, in Scalar std) {
+  // apply mapping
+  for (Size i=0;i<input.size();i++) {
+    input[i] = mapstdReverse(input[i], mean, std);
+  }
+  return input;
+}
+
+/// Applies standard mapping to each row in a matrix, given local input ranges and global output ranges
+/// \dfgPresetTitle Mapstd_Input
+/// \dfgPresetType input $TYPE$
+/// \dfgPresetOmit
+function Mat mapstd(io Mat input, Scalar means[], Scalar stds[]) {
+  for(Size i=0; i<input.rows(); i++) {
+    input.setRow(i, mapstd(input.getRow(i), means[i], stds[i]));
+  }
+  return input;
+}
+
+/// Removes standard mapping from each row in a matrix, given global input ranges and local output ranges
+/// \dfgPresetTitle Mapstd_Output
+/// \dfgPresetType input $TYPE$
+/// \dfgPresetOmit
+function Mat mapstdReverse(io Mat input, Scalar means[], Scalar stds[]) {
+  for(Size i=0; i<input.rows(); i++) {
+    input.setRow(i, mapstdReverse(input.getRow(i), means[i], stds[i]));
+  }
+  return input;
+}
+
+/// Applies standard mapping to an array (as a column vector), given local input ranges and global output ranges
+/// \dfgPresetOmit
+function Scalar[] mapstd(io Scalar input[], Scalar means[], Scalar stds[]) {
+  for(Size i=0; i<input.size(); i++) {
+    input[i] = mapstd(input[i], means[i], stds[i]);
+  }
+  return input;
+}
+
+/// Removes stardard mapping from an array (as a column vector), given global input ranges and local output ranges
+/// \dfgPresetOmit
+function Scalar[] mapstdReverse(io Scalar input[], Scalar means[], Scalar stds[]) {
+  for(Size i=0; i<input.size(); i++) {
+    input[i] = mapstdReverse(input[i], means[i], stds[i]);
+  }
+  return input;
+}

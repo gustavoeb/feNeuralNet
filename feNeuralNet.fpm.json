@@ -1,0 +1,24 @@
+{
+  "version": "1.0.0",
+  "code": [
+    // structs
+    "Structs/Array.kl",
+    "Structs/Mat.kl",
+
+    // functions
+    "Functions/TransferFunctions.kl",
+    "Functions/ProcessingFunctions.kl",
+
+    // interfaces
+    "Interfaces/ILayer.kl",
+
+    // objects
+    "Objects/Layer.kl",
+    "Objects/Net.kl"
+    ],
+
+  "dfgPresets": {
+    "dir": "DFG",
+    "presetPath": "feNeuralNet"
+  }
+}

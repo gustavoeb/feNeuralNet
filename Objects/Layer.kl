@@ -1,0 +1,129 @@
+//
+// Developed by Gustavo E. Boehs
+//
+/**
+The Layer object represents a neural network's layers. It supports
+4 transfer functions (linear, tangent sigmoid, logistic sigmoid and softmax).
+Multiple layers are connected in a Net object.
+
+\rst
+  .. kl-example:: Layer
+
+    // Create a hidden layer with 10 neurons
+    // and 'tansig' transfer function.
+    Layer layer(10,'tansig','hidden');
+
+    // Add layer to a network.
+    Net net();
+    net.layers.push(layer);
+
+\endrst
+*/
+
+object Layer : ILayer {
+  String name;
+  Integer index;
+  Integer parentIndex;
+  Integer neurons;
+  String transferFunc;
+};
+
+/// Constructs an empty layer
+/// \dfgPresetOmit
+function Layer() {
+  this.setTransferFunc('purelin');
+}
+
+/// Constructs a named layer
+/// \dfgPresetOmit
+function Layer(String name) {
+  this.setTransferFunc('purelin');
+  this.setName(name);
+}
+
+/// Constructs a n sized layer
+/// \dfgPresetOmit
+function Layer(Integer neurons) {
+  this.setTransferFunc('purelin');
+  this.setNeuronSize(neurons);
+}
+
+/// Constructs named layer based on number of neurons
+/// \dfgPresetOmit
+function Layer(String name, Integer neurons) {
+  this.setTransferFunc('purelin');
+  this.setName(name);
+  this.setNeuronSize(neurons);
+}
+
+/// Constructs a layer based on number of neurons and transfer function
+/// \dfgPresetOmit
+function Layer(Integer neurons, String transferFunc) {
+  this.setTransferFunc(transferFunc);
+  this.setNeuronSize(neurons);
+}
+
+/// Constructs a layer based on name, number of neurons, and transfer function
+function Layer(String name, Integer neurons, String transferFunc) {
+  this.setTransferFunc(transferFunc);
+  this.setNeuronSize(neurons);
+  this.setName(name);
+}
+
+/// Resizes a layer.
+function Layer.setNeuronSize!(Integer neurons) {
+  this.neurons = neurons;
+}
+
+/// Gets a layer size.
+function Integer Layer.getNeuronSize() {
+  return this.neurons;
+}
+
+/// Alters the transfer function within a layer.
+function Layer.setTransferFunc!(String transferFunc) {
+  Integer supportedFuncs[String];
+  supportedFuncs['purelin'] = 0;
+  supportedFuncs['logsig'] = 1;
+  supportedFuncs['tansig'] = 2;
+  supportedFuncs['softmax'] = 3;
+  if (~supportedFuncs.has(transferFunc))
+    setError('Transfer function ' + transferFunc + ' is not supported.');
+  else
+    this.transferFunc = transferFunc;
+}
+
+/// Gets the layers current transfer function.
+function String Layer.getTransferFunc() {
+  return this.transferFunc;
+}
+
+/// Sets the layer's name.
+function Layer.setName!(in String name) {
+  this.name = name;
+}
+
+/// Gets the layer's name.
+function String Layer.getName() {
+  return this.name;
+}
+
+/// Sets the layer index.
+function Layer.setIndex!(in Integer index) {
+  this.index = index;
+}
+
+/// Gets the layer index.
+function Integer Layer.getIndex() {
+  return this.index;
+}
+
+/// Connects the layer to a parent.
+function Layer.setParentIndex!(in Integer index) {
+  this.parentIndex = index;
+}
+
+/// Gets the layer's a parent.
+function Integer Layer.getParentIndex() {
+  return this.parentIndex;
+}
