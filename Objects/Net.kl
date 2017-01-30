@@ -26,8 +26,6 @@ Known issues:
 \endrst
 */
 
-require Matrix;
-
 object Net {
   Layer[] layers;
   Integer[] inputs;

@@ -4,7 +4,7 @@
   "metadata" : {
     "uiTooltip" : "Supported types:\n  file: FilePath\n  result: Scalar[]\n"
     },
-  "title" : "FromCSV",
+  "title" : "ArrayFromCSV",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -31,11 +31,11 @@
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "35D9F03EB550A1D36E5417C8FB10C6F6",
+  "presetGUID" : "4CAF9C8D1F0ABC5AF04F04237AE27457",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  result = fromCSV(file);
+  result = ArrayFromCSV(file);
 }
 "
   }

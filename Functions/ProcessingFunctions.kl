@@ -155,6 +155,7 @@ function Scalar[] mapstdReverse(io Scalar input[], in Scalar mean, in Scalar std
 /// Applies standard mapping to each row in a matrix, given local input ranges and global output ranges
 /// \dfgPresetTitle Mapstd_Input
 /// \dfgPresetType input $TYPE$
+/// \dfgPresetOmit
 function Mat mapstd(io Mat input, Scalar means[], Scalar stds[]) {
   for(Size i=0; i<input.rows(); i++) {
     input.setRow(i, mapstd(input.getRow(i), means[i], stds[i]));
@@ -165,6 +166,7 @@ function Mat mapstd(io Mat input, Scalar means[], Scalar stds[]) {
 /// Removes standard mapping from each row in a matrix, given global input ranges and local output ranges
 /// \dfgPresetTitle Mapstd_Output
 /// \dfgPresetType input $TYPE$
+/// \dfgPresetOmit
 function Mat mapstdReverse(io Mat input, Scalar means[], Scalar stds[]) {
   for(Size i=0; i<input.rows(); i++) {
     input.setRow(i, mapstdReverse(input.getRow(i), means[i], stds[i]));

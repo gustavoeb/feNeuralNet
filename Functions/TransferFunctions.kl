@@ -10,8 +10,6 @@ Known issues:
 
 */
 
-require Matrix;
-
 /// Hyperbolic tangent sigmoid transfer function
 function Scalar[] tansig(io Scalar inputs[]) {
   for(Size i=0; i<inputs.size(); i++){

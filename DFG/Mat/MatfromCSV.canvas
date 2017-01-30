@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "This transfer functions are relevant for squashing values\nin a non linear fashion.\n\nKnown issues:\nsoftmax layer overflows with high values\n\n\nHyperbolic tangent sigmoid transfer function\n\nSupported types:\n  inputs: Scalar[]\n  result: Scalar[]\n"
+    "uiTooltip" : "A constructor that will read matrices from .txt files. MATlab's dlmwrite() notation is expected.\n\nSupported types:\n  file: FilePath\n  result: Mat\n"
     },
-  "title" : "Tansig",
+  "title" : "MatFromCSV",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -15,27 +15,30 @@
       },
     {
       "objectType" : "ExecPort",
-      "name" : "inputs",
-      "nodePortType" : "IO",
-      "execPortType" : "IO",
-      "typeSpec" : "Scalar[]"
+      "name" : "file",
+      "nodePortType" : "Out",
+      "execPortType" : "In",
+      "typeSpec" : "FilePath"
       },
     {
       "objectType" : "ExecPort",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+        },
       "name" : "result",
       "nodePortType" : "In",
       "execPortType" : "Out",
-      "typeSpec" : "Scalar[]"
+      "typeSpec" : "Mat"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "B10B8CF036555F13B90737C1916B974A",
+  "presetGUID" : "6642240AA6339D1CBA5E753317B8223E",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  result = tansig(inputs);
+  result = MatFromCSV(file);
 }
 "
   }

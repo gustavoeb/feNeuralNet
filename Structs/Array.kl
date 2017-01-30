@@ -1,5 +1,5 @@
 /// \dfgPresetFolder Array
-function Scalar[] fromCSV(FilePath file) {
+function Scalar[] ArrayFromCSV(FilePath file) {
   if(!file.exists())
     throw FUNC + ": file " + file + " does not exist.";
   if(!file.extension())

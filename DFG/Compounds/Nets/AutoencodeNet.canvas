@@ -5,9 +5,9 @@
     "uiNodeColor" : "{\n  \"r\" : 84,\n  \"g\" : 94,\n  \"b\" : 99\n  }",
     "uiGraphZoom" : "{\n  \"value\" : 1.0\n  }",
     "uiTooltip" : "A basic autoencoder net, with only the encoding part consiting of a 'logsig' layer.",
-    "uiGraphPan" : "{\n  \"x\" : -486.8489379882813,\n  \"y\" : -39.65350341796875\n  }"
+    "uiGraphPan" : "{\n  \"x\" : -526.8489990234375,\n  \"y\" : -127.1535034179688\n  }"
     },
-  "title" : "AutodecodeNet",
+  "title" : "AutoencodeNet",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -81,12 +81,12 @@
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "FD553973DEBE61938310DEB0C72411ED",
+  "presetGUID" : "CD9BF9DB92291E6D4AA492C8FA670ADC",
   "nodes" : [
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":593.848937988,\"y\":245.653503418}"
+        "uiGraphPos" : "{\"x\":752.848999023,\"y\":391.653503418}"
         },
       "name" : "NetInput",
       "ports" : [
@@ -117,7 +117,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":725.848937988,\"y\":245.653503418}"
+        "uiGraphPos" : "{\"x\":884.848999023,\"y\":391.653503418}"
         },
       "name" : "NetOutput",
       "ports" : [
@@ -162,6 +162,27 @@
         ],
       "executable" : "feNeuralNet.Compounds.NetOutput",
       "presetGUID" : "46313FF631084047F037F9F88F5DD610"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":1043.84899902,\"y\":391.653503418}"
+        },
+      "name" : "Cache_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "name" : "exec",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "value",
+          "nodePortType" : "In"
+          }
+        ],
+      "executable" : "Fabric.Core.Data.Cache",
+      "presetGUID" : "D903AFD981FE9214C69943F542D5FD60"
       }
     ],
   "connections" : {
@@ -181,6 +202,9 @@
       "NetOutput.net"
       ],
     "NetOutput.net" : [
+      "Cache_1.value"
+      ],
+    "Cache_1.value" : [
       "net"
       ]
     },
@@ -840,6 +864,37 @@ dfgEntry {
 
 dfgEntry {
   this.setOutput(id);
+}
+"
+      },
+    "Fabric.Core.Data.Cache" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiNodeColor" : "{\n  \"r\" : 214,\n  \"g\" : 191,\n  \"b\" : 103\n  }",
+        "uiAlwaysShowDaisyChainPorts" : "true",
+        "uiHeaderColor" : "{\n  \"r\" : 188,\n  \"g\" : 129,\n  \"b\" : 83\n  }"
+        },
+      "title" : "Cache",
+      "cacheRule" : "always",
+      "ports" : [
+        {
+          "objectType" : "ExecPort",
+          "name" : "exec",
+          "nodePortType" : "IO",
+          "execPortType" : "IO",
+          "typeSpec" : "Execute"
+          },
+        {
+          "objectType" : "ExecPort",
+          "name" : "value",
+          "nodePortType" : "Out",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "D903AFD981FE9214C69943F542D5FD60",
+      "code" : "dfgEntry {
 }
 "
       }

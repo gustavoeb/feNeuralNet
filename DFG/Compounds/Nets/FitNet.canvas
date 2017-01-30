@@ -3,9 +3,9 @@
   "metadata" : {
     "uiTextColor" : "{\n  \"r\" : 218,\n  \"g\" : 218,\n  \"b\" : 218\n  }",
     "uiNodeColor" : "{\n  \"r\" : 84,\n  \"g\" : 94,\n  \"b\" : 99\n  }",
-    "uiGraphZoom" : "{\n  \"value\" : 0.8897074460983276\n  }",
+    "uiGraphZoom" : "{\n  \"value\" : 1.0\n  }",
     "uiTooltip" : "A basic data fitting network with a 'tansig'  hidden layer and a 'purelin' output layer.",
-    "uiGraphPan" : "{\n  \"x\" : -301.5227358847697,\n  \"y\" : -2.739212485814278\n  }"
+    "uiGraphPan" : "{\n  \"x\" : -310.2512817382813,\n  \"y\" : 18.64433288574219\n  }"
     },
   "title" : "FitNet",
   "ports" : [
@@ -119,12 +119,12 @@
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "647CA173B43B24F61563E1CE08881183",
+  "presetGUID" : "73FA62464D231EFAD578A11710301DE5",
   "nodes" : [
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":364.803283691,\"y\":243.535980225}"
+        "uiGraphPos" : "{\"x\":458.751281738,\"y\":245.855667114}"
         },
       "name" : "NetInput",
       "ports" : [
@@ -155,7 +155,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":527.024597168,\"y\":245.078582764}"
+        "uiGraphPos" : "{\"x\":590.751281738,\"y\":245.855667114}"
         },
       "name" : "HiddenLayer",
       "ports" : [
@@ -204,7 +204,7 @@
     {
       "objectType" : "Inst",
       "metadata" : {
-        "uiGraphPos" : "{\"x\":725.848937988,\"y\":245.653503418}"
+        "uiGraphPos" : "{\"x\":749.751281738,\"y\":245.855667114}"
         },
       "name" : "NetOutput",
       "ports" : [
@@ -249,6 +249,27 @@
         ],
       "executable" : "feNeuralNet.Compounds.NetOutput",
       "presetGUID" : "46313FF631084047F037F9F88F5DD610"
+      },
+    {
+      "objectType" : "Inst",
+      "metadata" : {
+        "uiGraphPos" : "{\"x\":908.751281738,\"y\":245.855667114}"
+        },
+      "name" : "Cache_1",
+      "ports" : [
+        {
+          "objectType" : "InstPort",
+          "name" : "exec",
+          "nodePortType" : "IO"
+          },
+        {
+          "objectType" : "InstPort",
+          "name" : "value",
+          "nodePortType" : "In"
+          }
+        ],
+      "executable" : "Fabric.Core.Data.Cache",
+      "presetGUID" : "D903AFD981FE9214C69943F542D5FD60"
       }
     ],
   "connections" : {
@@ -280,6 +301,9 @@
       "NetOutput.net"
       ],
     "NetOutput.net" : [
+      "Cache_1.value"
+      ],
+    "Cache_1.value" : [
       "net"
       ]
     },
@@ -1151,6 +1175,37 @@ dfgEntry {
 
 dfgEntry {
   this.setOutput(id);
+}
+"
+      },
+    "Fabric.Core.Data.Cache" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiNodeColor" : "{\n  \"r\" : 214,\n  \"g\" : 191,\n  \"b\" : 103\n  }",
+        "uiAlwaysShowDaisyChainPorts" : "true",
+        "uiHeaderColor" : "{\n  \"r\" : 188,\n  \"g\" : 129,\n  \"b\" : 83\n  }"
+        },
+      "title" : "Cache",
+      "cacheRule" : "always",
+      "ports" : [
+        {
+          "objectType" : "ExecPort",
+          "name" : "exec",
+          "nodePortType" : "IO",
+          "execPortType" : "IO",
+          "typeSpec" : "Execute"
+          },
+        {
+          "objectType" : "ExecPort",
+          "name" : "value",
+          "nodePortType" : "Out",
+          "execPortType" : "In",
+          "typeSpec" : "$TYPE$"
+          }
+        ],
+      "extDeps" : {},
+      "presetGUID" : "D903AFD981FE9214C69943F542D5FD60",
+      "code" : "dfgEntry {
 }
 "
       }
