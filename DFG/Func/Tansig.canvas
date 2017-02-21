@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "This transfer functions are relevant for squashing values\nin a non linear fashion.\n\nKnown issues:\nsoftmax layer overflows with high values\n\n\nHyperbolic tangent sigmoid transfer function\n\nSupported types:\n  inputs: Scalar[]\n  result: Scalar[]\n"
+    "uiTooltip" : "This transfer functions are relevant for squashing values\nin a non linear fashion.\n\nKnown issues:\nsoftmax layer overflows with high values\n\n\nHyperbolic tangent sigmoid transfer function\n\nSupported types:\n  inputs: Scalar\n  result: Scalar\n"
     },
   "title" : "Tansig",
   "ports" : [
@@ -18,20 +18,20 @@
       "name" : "inputs",
       "nodePortType" : "IO",
       "execPortType" : "IO",
-      "typeSpec" : "Scalar[]"
+      "typeSpec" : "$TYPE$"
       },
     {
       "objectType" : "ExecPort",
       "name" : "result",
       "nodePortType" : "In",
       "execPortType" : "Out",
-      "typeSpec" : "Scalar[]"
+      "typeSpec" : "$TYPE$"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "B10B8CF036555F13B90737C1916B974A",
+  "presetGUID" : "4EDCAF3E2DB4B31F58D54671383CE1D2",
   "code" : "require feNeuralNet;
 
 dfgEntry {

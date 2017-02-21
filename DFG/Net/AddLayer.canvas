@@ -18,7 +18,7 @@
       "name" : "this",
       "nodePortType" : "IO",
       "execPortType" : "IO",
-      "typeSpec" : "Net"
+      "typeSpec" : "$TYPE$"
       },
     {
       "objectType" : "ExecPort",
