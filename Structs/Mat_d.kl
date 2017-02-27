@@ -36,7 +36,7 @@ function Mat_d Mat_dFromCSV(FilePath file) {
   String all[] = reader.readAll().splitAny(',\n');
   Float64 allScalars[];
   for (Integer i = 0; i < all.size()-1; i++) {
-      allScalars.push(all[i].toScalar());
+      allScalars.push(all[i].toFloat64());
   }
   Integer cols = row.size();
   Integer rows = (all.size()-1)/row.size();
