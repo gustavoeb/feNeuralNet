@@ -1,6 +1,5 @@
 /// An interface for different types of neural network layers
 /// \dfgPresetOmit
-/// \dfgPresetOmit
 interface ILayer {
   setNeuronSize!(in Integer neurons);
   setTransferFunc!(in String transferFunc);

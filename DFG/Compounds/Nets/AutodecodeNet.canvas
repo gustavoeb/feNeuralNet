@@ -4,7 +4,7 @@
     "uiTextColor" : "{\n  \"r\" : 218,\n  \"g\" : 218,\n  \"b\" : 218\n  }",
     "uiNodeColor" : "{\n  \"r\" : 84,\n  \"g\" : 94,\n  \"b\" : 99\n  }",
     "uiGraphZoom" : "{\n  \"value\" : 1.0\n  }",
-    "uiTooltip" : "A basic autoencoder net, with only the encoding part consiting of a 'logsig' layer.",
+    "uiTooltip" : "A basic autoencoder net, with only the decoding part consiting of a 'purelin' layer.",
     "uiGraphPan" : "{\n  \"x\" : -218.8489379882813,\n  \"y\" : -181.1535034179688\n  }"
     },
   "title" : "AutodecodeNet",
@@ -102,6 +102,11 @@
           },
         {
           "objectType" : "InstPort",
+          "name" : "net_d",
+          "nodePortType" : "Out"
+          },
+        {
+          "objectType" : "InstPort",
           "name" : "name",
           "nodePortType" : "In"
           },
@@ -112,7 +117,7 @@
           }
         ],
       "executable" : "feNeuralNet.Compounds.NetInput",
-      "presetGUID" : "0A4F605F43358D9F097B3BB79D28B063"
+      "presetGUID" : "918CAA57AD8A3ADC5966AB7B5C1C0E27"
       },
     {
       "objectType" : "Inst",
@@ -161,7 +166,7 @@
           }
         ],
       "executable" : "feNeuralNet.Compounds.NetOutput",
-      "presetGUID" : "46313FF631084047F037F9F88F5DD610"
+      "presetGUID" : "B4CA31CD8AE3A4B33C959C000BBE3DEB"
       },
     {
       "objectType" : "Inst",
@@ -216,7 +221,7 @@
         "uiNodeColor" : "{\n  \"r\" : 186,\n  \"g\" : 209,\n  \"b\" : 220\n  }",
         "uiGraphZoom" : "{\n  \"value\" : 1.0\n  }",
         "uiTooltip" : "A compound that creates a neural network and sets up its inputs.",
-        "uiGraphPan" : "{\n  \"x\" : 298.5075988769531,\n  \"y\" : -10.38583374023438\n  }"
+        "uiGraphPan" : "{\n  \"x\" : 45.50759887695313,\n  \"y\" : 9.614166259765625\n  }"
         },
       "title" : "NetInput",
       "ports" : [
@@ -242,6 +247,16 @@
           },
         {
           "objectType" : "ExecPort",
+          "name" : "net_d",
+          "nodePortType" : "In",
+          "defaultValues" : {
+            "Net_d" : null
+            },
+          "execPortType" : "Out",
+          "typeSpec" : "Net_d"
+          },
+        {
+          "objectType" : "ExecPort",
           "name" : "name",
           "nodePortType" : "Out",
           "defaultValues" : {
@@ -264,12 +279,12 @@
       "extDeps" : {
         "feNeuralNet" : "*"
         },
-      "presetGUID" : "0A4F605F43358D9F097B3BB79D28B063",
+      "presetGUID" : "918CAA57AD8A3ADC5966AB7B5C1C0E27",
       "nodes" : [
         {
           "objectType" : "Inst",
           "metadata" : {
-            "uiGraphPos" : "{\"x\":58.3412362337,\"y\":160.0}"
+            "uiGraphPos" : "{\"x\":49.3412361145,\"y\":102.0}"
             },
           "name" : "Empty_Net_1",
           "ports" : [
@@ -362,6 +377,58 @@
             ],
           "executable" : "feNeuralNet.Layer.Layer",
           "presetGUID" : "E323035F7DCC557E2189018C2E521C90"
+          },
+        {
+          "objectType" : "Inst",
+          "metadata" : {
+            "uiGraphPos" : "{\"x\":54.492401123,\"y\":393.38583374}"
+            },
+          "name" : "Empty_Net_d_1",
+          "ports" : [
+            {
+              "objectType" : "InstPort",
+              "name" : "exec",
+              "nodePortType" : "IO"
+              },
+            {
+              "objectType" : "InstPort",
+              "name" : "result",
+              "nodePortType" : "Out"
+              }
+            ],
+          "executable" : "feNeuralNet.Net.Net_d.Empty_Net_d",
+          "presetGUID" : "7A0BB2CFB96651BC3F881CE5B98D6F41"
+          },
+        {
+          "objectType" : "Inst",
+          "metadata" : {
+            "uiGraphPos" : "{\"x\":219.492401123,\"y\":324.38583374}"
+            },
+          "name" : "AddInputLayer_2",
+          "ports" : [
+            {
+              "objectType" : "InstPort",
+              "name" : "exec",
+              "nodePortType" : "IO"
+              },
+            {
+              "objectType" : "InstPort",
+              "name" : "this",
+              "nodePortType" : "IO"
+              },
+            {
+              "objectType" : "InstPort",
+              "name" : "layer",
+              "nodePortType" : "In"
+              },
+            {
+              "objectType" : "InstPort",
+              "name" : "id",
+              "nodePortType" : "Out"
+              }
+            ],
+          "executable" : "feNeuralNet.Net.AddInputLayer",
+          "presetGUID" : "84E99DE58C9D5A3FB726D2991A0EFA9E"
           }
         ],
       "connections" : {
@@ -378,7 +445,14 @@
           "net"
           ],
         "Layer_2.result" : [
-          "AddInputLayer_1.layer"
+          "AddInputLayer_1.layer",
+          "AddInputLayer_2.layer"
+          ],
+        "Empty_Net_d_1.result" : [
+          "AddInputLayer_2.this"
+          ],
+        "AddInputLayer_2.this" : [
+          "net_d"
           ]
         }
       },
@@ -434,7 +508,7 @@ dfgEntry {
           "name" : "this",
           "nodePortType" : "IO",
           "execPortType" : "IO",
-          "typeSpec" : "Net"
+          "typeSpec" : "$TYPE$"
           },
         {
           "objectType" : "ExecPort",
@@ -516,6 +590,39 @@ dfgEntry {
 }
 "
       },
+    "feNeuralNet.Net.Net_d.Empty_Net_d" : {
+      "objectType" : "Func",
+      "metadata" : {
+        "uiTooltip" : "Constructs empty network\n\nSupported types:\n  result: Net_d\n"
+        },
+      "title" : "Empty_Net_d",
+      "ports" : [
+        {
+          "objectType" : "ExecPort",
+          "name" : "exec",
+          "nodePortType" : "IO",
+          "execPortType" : "IO",
+          "typeSpec" : "Execute"
+          },
+        {
+          "objectType" : "ExecPort",
+          "name" : "result",
+          "nodePortType" : "In",
+          "execPortType" : "Out",
+          "typeSpec" : "Net_d"
+          }
+        ],
+      "extDeps" : {
+        "feNeuralNet" : "*"
+        },
+      "presetGUID" : "7A0BB2CFB96651BC3F881CE5B98D6F41",
+      "code" : "require feNeuralNet;
+
+dfgEntry {
+  result = Net_d();
+}
+"
+      },
     "feNeuralNet.Compounds.NetOutput" : {
       "objectType" : "Graph",
       "metadata" : {
@@ -545,7 +652,7 @@ dfgEntry {
             "Net" : null
             },
           "execPortType" : "IO",
-          "typeSpec" : "Net"
+          "typeSpec" : "$TYPE$"
           },
         {
           "objectType" : "ExecPort",
@@ -612,7 +719,7 @@ dfgEntry {
       "extDeps" : {
         "feNeuralNet" : "*"
         },
-      "presetGUID" : "46313FF631084047F037F9F88F5DD610",
+      "presetGUID" : "B4CA31CD8AE3A4B33C959C000BBE3DEB",
       "nodes" : [
         {
           "objectType" : "Inst",
@@ -779,7 +886,7 @@ dfgEntry {
           "name" : "this",
           "nodePortType" : "IO",
           "execPortType" : "IO",
-          "typeSpec" : "Net"
+          "typeSpec" : "$TYPE$"
           },
         {
           "objectType" : "ExecPort",
@@ -796,7 +903,7 @@ dfgEntry {
           "name" : "weights",
           "nodePortType" : "Out",
           "execPortType" : "In",
-          "typeSpec" : "Mat"
+          "typeSpec" : "$TYPE1$"
           },
         {
           "objectType" : "ExecPort",
@@ -806,7 +913,7 @@ dfgEntry {
           "name" : "bias",
           "nodePortType" : "Out",
           "execPortType" : "In",
-          "typeSpec" : "Mat"
+          "typeSpec" : "$TYPE1$"
           },
         {
           "objectType" : "ExecPort",
@@ -846,7 +953,7 @@ dfgEntry {
           "name" : "this",
           "nodePortType" : "IO",
           "execPortType" : "IO",
-          "typeSpec" : "Net"
+          "typeSpec" : "$TYPE$"
           },
         {
           "objectType" : "ExecPort",

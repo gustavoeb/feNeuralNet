@@ -46,6 +46,17 @@ function Mat MatFromCSV(FilePath file) {
   return mat;
 }
 
+/// A constructor of random values (0 > val < 1).
+/// \param rows number of rows
+/// \param cols number of comuns
+/// \dfgPresetFolder Mat
+function Mat Rand(Integer seed, Integer rows, Integer cols) {
+  Mat mat(rows,cols);
+  Scalar randVals[];
+  randVals = mathRandomFloat32Array (rows*cols, seed, 1, 1, 0.0, 1.0);
+  mat.setAll(randVals);
+  return mat;
+}
 
 /// Gell all the matrix element as a scalar array
 /// \dfgPresetOmit
