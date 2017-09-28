@@ -2,7 +2,7 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Hyperbolic logistic sigmoid transfer function\n\nSupported types:\n  inputs: Scalar[]\n  result: Scalar[]\n"
+    "uiTooltip" : "Hyperbolic logistic sigmoid transfer function\n\nSupported types:\n  inputs: Scalar\n  result: Scalar\n"
     },
   "title" : "Logsig",
   "ports" : [
@@ -18,20 +18,20 @@
       "name" : "inputs",
       "nodePortType" : "IO",
       "execPortType" : "IO",
-      "typeSpec" : "Scalar[]"
+      "typeSpec" : "$TYPE$"
       },
     {
       "objectType" : "ExecPort",
       "name" : "result",
       "nodePortType" : "In",
       "execPortType" : "Out",
-      "typeSpec" : "Scalar[]"
+      "typeSpec" : "$TYPE$"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "B590355C61D0F060478B70498512529D",
+  "presetGUID" : "B4A85F0BE53A0804915737C9B58BD75E",
   "code" : "require feNeuralNet;
 
 dfgEntry {

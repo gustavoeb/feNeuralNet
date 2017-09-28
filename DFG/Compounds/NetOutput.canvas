@@ -21,13 +21,14 @@
       },
     {
       "objectType" : "ExecPort",
+      "metadata" : {},
       "name" : "net",
       "nodePortType" : "IO",
       "defaultValues" : {
         "Net" : null
         },
       "execPortType" : "IO",
-      "typeSpec" : "Net"
+      "typeSpec" : "$TYPE$"
       },
     {
       "objectType" : "ExecPort",
@@ -94,7 +95,7 @@
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "46313FF631084047F037F9F88F5DD610",
+  "presetGUID" : "B4CA31CD8AE3A4B33C959C000BBE3DEB",
   "nodes" : [
     {
       "objectType" : "Inst",
@@ -315,7 +316,7 @@ dfgEntry {
           "name" : "this",
           "nodePortType" : "IO",
           "execPortType" : "IO",
-          "typeSpec" : "Net"
+          "typeSpec" : "$TYPE$"
           },
         {
           "objectType" : "ExecPort",
@@ -332,7 +333,7 @@ dfgEntry {
           "name" : "weights",
           "nodePortType" : "Out",
           "execPortType" : "In",
-          "typeSpec" : "Mat"
+          "typeSpec" : "$TYPE1$"
           },
         {
           "objectType" : "ExecPort",
@@ -342,7 +343,7 @@ dfgEntry {
           "name" : "bias",
           "nodePortType" : "Out",
           "execPortType" : "In",
-          "typeSpec" : "Mat"
+          "typeSpec" : "$TYPE1$"
           },
         {
           "objectType" : "ExecPort",
@@ -382,7 +383,7 @@ dfgEntry {
           "name" : "this",
           "nodePortType" : "IO",
           "execPortType" : "IO",
-          "typeSpec" : "Net"
+          "typeSpec" : "$TYPE$"
           },
         {
           "objectType" : "ExecPort",

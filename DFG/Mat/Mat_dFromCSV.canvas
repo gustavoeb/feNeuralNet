@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "A feedForward step.\n\nSupported types:\n  this: Net\n  input: $TYPE$\n  result: Mat\n"
+    "uiTooltip" : "A constructor that will read matrices from .txt files. MATlab's dlmwrite() notation is expected.\n\nSupported types:\n  file: FilePath\n  result: Mat_d\n"
     },
-  "title" : "FeedForward",
+  "title" : "Mat_dFromCSV",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -15,17 +15,10 @@
       },
     {
       "objectType" : "ExecPort",
-      "name" : "this",
+      "name" : "file",
       "nodePortType" : "Out",
       "execPortType" : "In",
-      "typeSpec" : "$NETTYPE$"
-      },
-    {
-      "objectType" : "ExecPort",
-      "name" : "input",
-      "nodePortType" : "Out",
-      "execPortType" : "In",
-      "typeSpec" : "$TYPE$"
+      "typeSpec" : "FilePath"
       },
     {
       "objectType" : "ExecPort",
@@ -35,17 +28,17 @@
       "name" : "result",
       "nodePortType" : "In",
       "execPortType" : "Out",
-      "typeSpec" : "$TYPE$"
+      "typeSpec" : "Mat_d"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "C80BDEB4CA8049E5E57F3B34B705A3F3",
+  "presetGUID" : "50D55384A37DDD8E38E55208970649D4",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  result = this.feedForward(input);
+  result = Mat_dFromCSV(file);
 }
 "
   }

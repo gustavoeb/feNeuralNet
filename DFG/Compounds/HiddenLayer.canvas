@@ -3,9 +3,9 @@
   "metadata" : {
     "uiTextColor" : "{\n  \"r\" : 20,\n  \"g\" : 20,\n  \"b\" : 20\n  }",
     "uiNodeColor" : "{\n  \"r\" : 186,\n  \"g\" : 209,\n  \"b\" : 220\n  }",
-    "uiGraphZoom" : "{\n  \"value\" : 1.0\n  }",
+    "uiGraphZoom" : "{\n  \"value\" : 0.7395214438438416\n  }",
     "uiTooltip" : "A compound that creates a hidden layer and fully connects it to the previous layer in the network.",
-    "uiGraphPan" : "{\n  \"x\" : 49.91020202636719,\n  \"y\" : 9.2742919921875\n  }"
+    "uiGraphPan" : "{\n  \"x\" : -109.0441678718589,\n  \"y\" : 81.48564414343127\n  }"
     },
   "title" : "HiddenLayer",
   "ports" : [
@@ -21,13 +21,14 @@
       },
     {
       "objectType" : "ExecPort",
+      "metadata" : {},
       "name" : "net",
       "nodePortType" : "IO",
       "defaultValues" : {
         "Net" : null
         },
       "execPortType" : "IO",
-      "typeSpec" : "Net"
+      "typeSpec" : "$TYPE$"
       },
     {
       "objectType" : "ExecPort",
@@ -94,7 +95,7 @@
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "7530D1882B5259F7CBF3E35809F4A726",
+  "presetGUID" : "1169EEF13BF84451593F2272D68BD6FF",
   "nodes" : [
     {
       "objectType" : "Inst",
@@ -229,7 +230,7 @@
           "name" : "this",
           "nodePortType" : "IO",
           "execPortType" : "IO",
-          "typeSpec" : "Net"
+          "typeSpec" : "$TYPE$"
           },
         {
           "objectType" : "ExecPort",
@@ -246,7 +247,7 @@
           "name" : "weights",
           "nodePortType" : "Out",
           "execPortType" : "In",
-          "typeSpec" : "Mat"
+          "typeSpec" : "$TYPE1$"
           },
         {
           "objectType" : "ExecPort",
@@ -256,7 +257,7 @@
           "name" : "bias",
           "nodePortType" : "Out",
           "execPortType" : "In",
-          "typeSpec" : "Mat"
+          "typeSpec" : "$TYPE1$"
           },
         {
           "objectType" : "ExecPort",

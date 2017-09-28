@@ -2,9 +2,11 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "A feedForward step.\n\nSupported types:\n  this: Net\n  input: $TYPE$\n  result: Mat\n"
+    "uiNodeColor" : "{\n  \"r\" : 99,\n  \"g\" : 129,\n  \"b\" : 92\n  }",
+    "uiDocUrl" : "http://docs.fabric-engine.com/FabricEngine/2.4.0/HTML/KLExtensionsGuide/Math/Mat_d.html",
+    "uiTooltip" : "Multiplies a matrix by a row vector.\n\nSupported types:\n  this: Mat_d\n  vector: Float64[]\n  result: Mat_d\n"
     },
-  "title" : "FeedForward",
+  "title" : "MultiplyRowVectorByMat",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -15,17 +17,20 @@
       },
     {
       "objectType" : "ExecPort",
+      "metadata" : {
+        "uiColor" : "{\n  \"r\" : 249,\n  \"g\" : 157,\n  \"b\" : 28\n  }"
+        },
       "name" : "this",
       "nodePortType" : "Out",
       "execPortType" : "In",
-      "typeSpec" : "$NETTYPE$"
+      "typeSpec" : "Mat_d"
       },
     {
       "objectType" : "ExecPort",
-      "name" : "input",
+      "name" : "vector",
       "nodePortType" : "Out",
       "execPortType" : "In",
-      "typeSpec" : "$TYPE$"
+      "typeSpec" : "Float64[]"
       },
     {
       "objectType" : "ExecPort",
@@ -35,17 +40,17 @@
       "name" : "result",
       "nodePortType" : "In",
       "execPortType" : "Out",
-      "typeSpec" : "$TYPE$"
+      "typeSpec" : "Mat_d"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "C80BDEB4CA8049E5E57F3B34B705A3F3",
+  "presetGUID" : "11B78DEEE7CB95C60A1DDE6A4A0BF54C",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  result = this.feedForward(input);
+  result = this.multiplyRowVectorByMat(vector);
 }
 "
   }

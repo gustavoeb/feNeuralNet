@@ -2,9 +2,9 @@
 {
   "objectType" : "Func",
   "metadata" : {
-    "uiTooltip" : "Supported types:\n  this: Net\n"
+    "uiTooltip" : "Constructs empty network\n\nSupported types:\n  result: Net_d\n"
     },
-  "title" : "SetLastAsOutput",
+  "title" : "Empty_Net_d",
   "ports" : [
     {
       "objectType" : "ExecPort",
@@ -15,20 +15,20 @@
       },
     {
       "objectType" : "ExecPort",
-      "name" : "this",
-      "nodePortType" : "IO",
-      "execPortType" : "IO",
-      "typeSpec" : "$TYPE$"
+      "name" : "result",
+      "nodePortType" : "In",
+      "execPortType" : "Out",
+      "typeSpec" : "Net_d"
       }
     ],
   "extDeps" : {
     "feNeuralNet" : "*"
     },
-  "presetGUID" : "9F5E5D67AB33B7781F37F99D75A14635",
+  "presetGUID" : "7A0BB2CFB96651BC3F881CE5B98D6F41",
   "code" : "require feNeuralNet;
 
 dfgEntry {
-  this.setLastAsOutput();
+  result = Net_d();
 }
 "
   }

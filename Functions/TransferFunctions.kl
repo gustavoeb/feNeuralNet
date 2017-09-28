@@ -11,17 +11,59 @@ Known issues:
 */
 
 /// Hyperbolic tangent sigmoid transfer function
+/// \dfgPresetOmit
+function Scalar tansig(io Scalar inputs) {
+  inputs = 2/(1+exp(-2*inputs))-1;
+  return inputs;
+}
+
+/// \dfgPresetOmit
+function Float64 tansig(io Float64 inputs) {
+  inputs = 2/(1+exp(-2*inputs))-1;
+  return inputs;
+}
+
+/// \dfgPresetOmit
 function Scalar[] tansig(io Scalar inputs[]) {
   for(Size i=0; i<inputs.size(); i++){
-    inputs[i] = 2/(1+exp(-2*inputs[i]))-1;
+    inputs[i] = tansig(inputs[i]);
+  }
+  return inputs;
+}
+
+/// \dfgPresetOmit
+function Float64[] tansig(io Float64 inputs[]) {
+  for(Size i=0; i<inputs.size(); i++){
+    inputs[i] = tansig(inputs[i]);
   }
   return inputs;
 }
 
 /// Hyperbolic logistic sigmoid transfer function
+/// \dfgPresetOmit
+function Scalar logsig(io Scalar inputs) {
+  inputs = 1 / (1 + exp(-inputs));
+  return inputs;
+}
+
+/// \dfgPresetOmit
+function Float64 logsig(io Float64 inputs) {
+  inputs = 1 / (1 + exp(-inputs));
+  return inputs;
+}
+
+/// \dfgPresetOmit
 function Scalar[] logsig(io Scalar inputs[]) {
   for(Size i=0; i<inputs.size(); i++){
-    inputs[i] = 1 / (1 + exp(-inputs[i]));
+    inputs[i] = logsig(inputs[i]);
+  }
+  return inputs;
+}
+
+/// \dfgPresetOmit
+function Float64[] logsig(io Float64 inputs[]) {
+  for(Size i=0; i<inputs.size(); i++){
+    inputs[i] = logsig(inputs[i]);
   }
   return inputs;
 }
@@ -29,7 +71,7 @@ function Scalar[] logsig(io Scalar inputs[]) {
 /// Softmax transfer function
 function Scalar[] softmax(io Scalar input[]) {
   Float64 sum;
-  Float64 input64;
+  Float64 input64; // we need extra precision in this operation
 
   for(Size i=0; i<input.size(); i++){
     input64 = input[i];
@@ -38,6 +80,18 @@ function Scalar[] softmax(io Scalar input[]) {
   for(Size i=0; i<input.size(); i++){
     input64 = input[i];
     input[i] = Scalar(exp(input64)/sum);
+  }
+  return input;
+}
+
+/// \dfgPresetOmit
+function Float64[] softmax(io Float64 input[]) {
+  Float64 sum;
+  for(Size i=0; i<input.size(); i++){
+    sum = sum + exp(input[i]);
+  }
+  for(Size i=0; i<input.size(); i++){
+    input[i] = Scalar(exp(input[i])/sum);
   }
   return input;
 }
@@ -58,8 +112,28 @@ function Mat softmax(io Mat input) {
   return input;
 }
 
+/// \dfgPresetOmit
+function Mat_d softmax(io Mat_d input) {
+  Float64 newValues[];
+
+  for(Size i=0; i<input.cols(); i++) {
+    newValues = newValues + softmax(input.getColumn(i));
+  }
+
+  Mat_d newMat(input.cols(),input.rows());
+  newMat.setAll(newValues);
+  input = newMat.transpose();
+
+  return input;
+}
+
 /// Softmax transfer function for matrices.
 /// \dfgPresetOmit
 function Scalar softmax(io Scalar input) {
+  return 1.0;
+}
+
+/// \dfgPresetOmit
+function Float64 softmax(io Float64 input) {
   return 1.0;
 }

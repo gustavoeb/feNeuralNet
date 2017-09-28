@@ -9,23 +9,23 @@ require FileIO;
 require Containers;
 
 /// \dfgPresetOmit
-function Mat(Mat_d mat) {
+function Mat_d(Mat mat) {
   this.rows = mat.rows();
   this.cols = mat.cols();
-
-  Float64 doubleVals[];
-  doubleVals = mat.getAll();
-  this.vals.resize(doubleVals.size());
   
-  for(Integer i=0; i<doubleVals.size(); i++){
-    this.vals[i] = Scalar(doubleVals[i]);
+  Scalar floatVals[];
+  floatVals = mat.getAll();
+  this.vals.resize(floatVals.size());
+  
+  for(Integer i=0; i<floatVals.size(); i++){
+    this.vals[i] = floatVals[i];
   }
 }
 
 /// A constructor that will read matrices from .txt files. MATlab's dlmwrite() notation is expected.
 /// \param file A text file in MATlabs ASCII formatting for matrices.
 /// \dfgPresetFolder Mat
-function Mat MatFromCSV(FilePath file) {
+function Mat_d Mat_dFromCSV(FilePath file) {
   if(!file.exists())
     throw FUNC + ": file " + file + " does not exist.";
   if(!file.extension())
@@ -34,38 +34,28 @@ function Mat MatFromCSV(FilePath file) {
   String row[] = reader.readLine().split(',');
   reader.seek(0);
   String all[] = reader.readAll().splitAny(',\n');
-  Scalar allScalars[];
+  Float64 allScalars[];
   for (Integer i = 0; i < all.size()-1; i++) {
       allScalars.push(all[i].toScalar());
   }
   Integer cols = row.size();
   Integer rows = (all.size()-1)/row.size();
-  Mat mat(rows,cols);
+  Mat_d mat(rows,cols);
   mat.setAll(allScalars);
 
   return mat;
 }
 
-/// A constructor of random values (0 > val < 1).
-/// \param rows number of rows
-/// \param cols number of comuns
-/// \dfgPresetFolder Mat
-function Mat Rand(Integer seed, Integer rows, Integer cols) {
-  Mat mat(rows,cols);
-  Scalar randVals[];
-  randVals = mathRandomFloat32Array (rows*cols, seed, 1, 1, 0.0, 1.0);
-  mat.setAll(randVals);
-  return mat;
-}
 
 /// Gell all the matrix element as a scalar array
 /// \dfgPresetOmit
-function Scalar[] Mat.getAll() {
+function Float64[] Mat_d.getAll() {
   return this.vals;
 }
 
+
 /// \dfgPresetOmit
-function Scalar Mat.get(in Integer index) {
+function Float64 Mat_d.get(in Integer index) {
   return this.vals[index];
 }
 
@@ -74,7 +64,7 @@ function Scalar Mat.get(in Integer index) {
 /// \param value A scalar value to be set.
 /// \dfgPresetTitle Set_unidimensional
 /// \dfgPresetOmit
-function Mat.set!(Integer index, Scalar value) {
+function Mat_d.set!(Integer index, Float64 value) {
   this.vals[index] = value;
 }
 
@@ -83,7 +73,7 @@ function Mat.set!(Integer index, Scalar value) {
 /// \param value A scalar value to be set in all positions of the index array.
 /// \dfgPresetTitle SetMany_unidimensional
 /// \dfgPresetOmit
-function Mat.set!(Integer set[], Scalar value) {
+function Mat_d.set!(Integer set[], Float64 value) {
   for (Integer i = 0; i < set.size(); i++) {
     this.vals[set[i]] = value;
   }
@@ -91,7 +81,7 @@ function Mat.set!(Integer set[], Scalar value) {
 
 /// Substitutes the matrix value contatiner.
 /// \dfgPresetOmit
-inline Mat.setAll!(Scalar vals[]) {
+function Mat_d.setAll!(Float64 vals[]) {
   if(this.vals.size() != vals.size())
     throw FUNC + ": size of array must match the matrix's number of elements (" + this.vals.size() + " vs " + vals.size() + ")";
   this.vals = vals;
@@ -102,7 +92,7 @@ inline Mat.setAll!(Scalar vals[]) {
 /// \param value An array of scalar values to be set in all positions of the index array.
 /// \dfgPresetTitle SetArray_unidimensional
 /// \dfgPresetOmit
-function Mat.set!(Integer set[], Scalar value[]) {
+function Mat_d.set!(Integer set[], Float64 value[]) {
   if (set.size() != value.size())
     throw FUNC + ": number of indices is different from number of values (" + set.size() + " of " + value.size() + ")";
   for (Integer i = 0; i < set.size(); i++) {
@@ -112,8 +102,8 @@ function Mat.set!(Integer set[], Scalar value[]) {
 
 /// A value getter for a row in a matrix.
 /// \param index The index of the row.
-function Scalar[] Mat.getRow(Integer index) {
-  Scalar row[];
+function Float64[] Mat_d.getRow(Integer index) {
+  Float64 row[];
   if (index > this.rows)
     throw FUNC + ": row index greater than number of rows (" + index + " of " + this.rows + ")";
   if (index < 0)
@@ -126,7 +116,7 @@ function Scalar[] Mat.getRow(Integer index) {
 
 /// A value setter for a row in a matrix.
 /// \param index The index of the row.
-function Mat.setRow!(Integer index, Scalar vals[]) {
+function Mat_d.setRow!(Integer index, Float64 vals[]) {
   if (index > this.rows)
     throw FUNC + ": row index greater than number of rows (" + index + " of " + this.rows + ")";
   if (index < 0)
@@ -140,8 +130,8 @@ function Mat.setRow!(Integer index, Scalar vals[]) {
 
 /// A value getter for a column in a matrix.
 /// \param index The index of the column.
-function Scalar[] Mat.getColumn(Integer index) {
-  Scalar column[];
+function Float64[] Mat_d.getColumn(Integer index) {
+  Float64 column[];
   if (index > this.cols)
     throw FUNC + ": colum index greater than number of columns (" + index + " of " + this.cols + ")";
   if (index < 0)
@@ -154,8 +144,8 @@ function Scalar[] Mat.getColumn(Integer index) {
 
 /// A value setter for a column in a matrix.
 /// \param index The index of the column.
-function Mat.setColumn!(Integer index, Scalar vals[]) {
-  Scalar column[];
+function Mat_d.setColumn!(Integer index, Float64 vals[]) {
+  Float64 column[];
   if (index > this.cols)
     throw FUNC + ": colum index greater than number of columns (" + index + " of " + this.cols + ")";
   if (index < 0)
@@ -170,7 +160,7 @@ function Mat.setColumn!(Integer index, Scalar vals[]) {
 /// Concatenates two matrices vertically.
 /// \param mat A matrix to be appended after the last row
 /// \dfgPresetOmit
-function Mat.vertcat!(Mat mat) {
+function Mat_d.vertcat!(Mat_d mat) {
   if (this.cols != mat.cols)
     throw FUNC + ": incompatible dimensions (" + this.sizeDesc() + " vs. " + mat.sizeDesc() + ")";
   this.rows = this.rows + mat.rows;
@@ -180,11 +170,11 @@ function Mat.vertcat!(Mat mat) {
 /// Concatenates two matrices horizontally.
 /// \param mat A matrix to be appended after the last column.
 /// \dfgPresetOmit
-function Mat.horzcat!(in Mat mat) {
+function Mat_d.horzcat!(in Mat_d mat) {
   // This is a sloppy implementation.
   // Should refactor when possible.
-  Mat thisClone = this.transpose();
-  Mat matClone = mat.transpose();
+  Mat_d thisClone = this.transpose();
+  Mat_d matClone = mat.transpose();
   thisClone.vertcat(matClone);
   this = thisClone.transpose();
 }
@@ -192,32 +182,32 @@ function Mat.horzcat!(in Mat mat) {
 
 /// Multiplies a matrix by a column vector.
 /// \param vector Array of scalar values for the multiplication.
-function Mat Mat.multiplyByColVector(Scalar vector[]) {
-  Mat columnVec(1,vector.size());
+function Mat_d Mat_d.multiplyByColVector(Float64 vector[]) {
+  Mat_d columnVec(1,vector.size());
   columnVec.setAll(vector);
   return this * columnVec;
 }
 
 /// Multiplies a matrix by a row vector.
 /// \param vector Array of scalar values for the multiplication.
-function Mat Mat.multiplyByRowVector(Scalar vector[]) {
-  Mat rowVec(vector.size(),1);
+function Mat_d Mat_d.multiplyByRowVector(Float64 vector[]) {
+  Mat_d rowVec(vector.size(),1);
   rowVec.setAll(vector);
   return this * rowVec;
 }
 
 /// Multiplies a matrix by a column vector.
 /// \param vector Array of scalar values for the multiplication.
-function Mat Mat.multiplyColVectorByMat(Scalar vector[]) {
-  Mat columnVec(1,vector.size());
+function Mat_d Mat_d.multiplyColVectorByMat(Float64 vector[]) {
+  Mat_d columnVec(1,vector.size());
   columnVec.setAll(vector);
   return columnVec * this;
 }
 
 /// Multiplies a matrix by a row vector.
 /// \param vector Array of scalar values for the multiplication.
-function Mat Mat.multiplyRowVectorByMat(Scalar vector[]) {
-  Mat rowVec(vector.size(),1);
+function Mat_d Mat_d.multiplyRowVectorByMat(Float64 vector[]) {
+  Mat_d rowVec(vector.size(),1);
   rowVec.setAll(vector);
   return rowVec * this;
 }
@@ -225,8 +215,8 @@ function Mat Mat.multiplyRowVectorByMat(Scalar vector[]) {
 /// A value getter for a sequence of columns in a matrix.
 /// \param start The first column in the sequence.
 /// \param end The last column in the sequence.
-function Mat Mat.getColumns(Integer start, Integer end) {
-  Scalar newVals[];
+function Mat_d Mat_d.getColumns(Integer start, Integer end) {
+  Float64 newVals[];
   if (start > this.cols || end > this.cols)
     throw FUNC + ": colum index greater than number of columns (" + start + ", " + end + " of " + this.rows + ")";
   if (start < 0 || end < 0)
@@ -238,7 +228,7 @@ function Mat Mat.getColumns(Integer start, Integer end) {
       newVals.push(this.vals[(i)*this.cols+j]);
     }
   }
-  Mat newMat(end-start+1,this.rows);
+  Mat_d newMat(end-start+1,this.rows);
   newMat.setAll(newVals);
   return newMat.transpose();
 }
@@ -246,9 +236,9 @@ function Mat Mat.getColumns(Integer start, Integer end) {
 /// A value getter for a sequence of rows in a matrix.
 /// \param start The first row in the sequence.
 /// \param end The last row in the sequence.
-function Mat Mat.getRows(Integer start, Integer end) {
-  Mat emptuMat(0,0);
-  Scalar newVals[];
+function Mat_d Mat_d.getRows(Integer start, Integer end) {
+  Mat_d emptuMat(0,0);
+  Float64 newVals[];
   if (start > this.rows || end > this.rows)
     throw FUNC + ": row index greater than number of rows (" + start + ", " + end + " of " + this.rows + ")";
   if (start < 0 || end < 0) 
@@ -260,7 +250,7 @@ function Mat Mat.getRows(Integer start, Integer end) {
       newVals.push(this.vals[(j)*this.cols+i]);
     }
   }
-  Mat new_mat(end-start+1,this.cols);
+  Mat_d new_mat(end-start+1,this.cols);
   new_mat.setAll(newVals);
   return new_mat;
 }
